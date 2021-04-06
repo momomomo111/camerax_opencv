@@ -1,0 +1,3 @@
+include ':opencv-sdk-4.5.2'
+include ':app'
+rootProject.name = "camerax_opencv"
