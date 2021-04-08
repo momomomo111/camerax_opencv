@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.camerax_opencv.ui.TitleFragment"
+        android:label="TitleFragment">
+        <action
+            android:id="@+id/action_titleFragment_to_gaussianBlurFragment"
+            app:destination="@id/gaussianBlurFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gaussianBlurFragment"
+        android:name="com.example.camerax_opencv.ui.GaussianBlurFragment"
+        android:label="GaussianBlurFragment" />
+</navigation>
