@@ -8,48 +8,30 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.example.camerax_opencv.data.GausianblurViewModel
 import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
-import com.example.camerax_opencv.util.checkPermissions
-import com.example.camerax_opencv.util.fixMatRotation
-import com.example.camerax_opencv.util.getMatFromImage
+import com.example.camerax_opencv.util.CameraUtil
 import com.google.common.util.concurrent.ListenableFuture
 import org.opencv.android.Utils
 import org.opencv.core.Mat
 import org.opencv.core.Size
 import org.opencv.imgproc.Imgproc
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class GaussianBlurFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(this).get(GausianblurViewModel::class.java) }
-
-    /*** Views  */
-    private var previewView: PreviewView? = null
-    private var imageView: ImageView? = null
-
-    /*** For CameraX  */
-    private var camera: Camera? = null
-    private var preview: Preview? = null
-    private var imageAnalysis: ImageAnalysis? = null
-    private val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
-
-
-    /*** Params */
-    private var kSize: Double = 1.0
-    private var sigmaX: Double = 0.0
-    private var sigmaY: Double = 0.0
 
     companion object {
 
@@ -69,8 +51,6 @@ class GaussianBlurFragment : Fragment() {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        previewView = binding.previewView
-        imageView = binding.imageView
         val seekBarKSize = binding.seekBarKSize
         val seekBarSigmaX = binding.seekBarSigmaX
         val seekBarSigmaY = binding.seekBarSigmaY
@@ -80,7 +60,7 @@ class GaussianBlurFragment : Fragment() {
         seekBarSigmaX.min = 0
         seekBarSigmaY.max = 50
         seekBarSigmaY.min = 0
-        if (checkPermissions(context)) {
+        if (CameraUtil.checkPermissions(context)) {
             startCamera()
         } else {
             ActivityResultContracts.RequestPermission()
@@ -100,11 +80,10 @@ class GaussianBlurFragment : Fragment() {
         seekBarKSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                kSize = progress.toDouble()
-                if (progress.toDouble() % 2 == 0.0) {
-                    kSize += 1
+                val kSize = progress.toDouble()
+                if (kSize % 2 != 0.0) {
+                    onKSizeChange(kSize)
                 }
-                onKSizeChange(kSize)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -116,7 +95,7 @@ class GaussianBlurFragment : Fragment() {
         seekBarSigmaX.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                sigmaX = progress.toDouble()
+                val sigmaX = progress.toDouble()
                 onSigmaXChange(sigmaX)
             }
 
@@ -129,7 +108,7 @@ class GaussianBlurFragment : Fragment() {
         seekBarSigmaY.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                sigmaY = progress.toDouble()
+                val sigmaY = progress.toDouble()
                 onSigmaYChange(sigmaY)
             }
 
@@ -151,20 +130,20 @@ class GaussianBlurFragment : Fragment() {
         cameraProviderFuture.addListener({
             try {
                 val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-                preview = Preview.Builder().build()
-                imageAnalysis = ImageAnalysis.Builder().build()
-                imageAnalysis!!.setAnalyzer(cameraExecutor, MyImageAnalyzer())
+                val preview = Preview.Builder().build()
+                val imageAnalysis = ImageAnalysis.Builder().build()
+                imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), MyImageAnalyzer())
                 val cameraSelector =
                     CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
                         .build()
                 cameraProvider.unbindAll()
-                camera = cameraProvider.bindToLifecycle(
+                val camera = cameraProvider.bindToLifecycle(
                     (context as LifecycleOwner),
                     cameraSelector,
                     preview,
                     imageAnalysis
                 )
-                preview!!.setSurfaceProvider(previewView!!.createSurfaceProvider(camera!!.cameraInfo))
+                preview.setSurfaceProvider(binding.previewView.createSurfaceProvider(camera.cameraInfo))
             } catch (e: Exception) {
                 Log.e("error", "[startCamera] Use case binding failed", e)
             }
@@ -174,15 +153,20 @@ class GaussianBlurFragment : Fragment() {
     private inner class MyImageAnalyzer : ImageAnalysis.Analyzer {
         override fun analyze(image: ImageProxy) {
             /* Create cv::mat(RGB888) from image(NV21) */
-            val matOrg: Mat = getMatFromImage(image)
+            val matOrg: Mat = CameraUtil.getMatFromImage(image)
 
             /* Fix image rotation (it looks image in PreviewView is automatically fixed by CameraX???) */
-            val mat: Mat = fixMatRotation(matOrg, previewView)
+            val mat: Mat = CameraUtil.fixMatRotation(matOrg, binding.previewView)
 
             /* Do some image processing */
             val matOutput = Mat(mat.rows(), mat.cols(), mat.type())
-            Imgproc.GaussianBlur(mat, matOutput, Size(kSize, kSize), sigmaX, sigmaY)
-
+            Imgproc.GaussianBlur(
+                mat,
+                matOutput,
+                Size(viewModel.kSize.value ?: 1.0, viewModel.kSize.value ?: 1.0),
+                viewModel.sigmaX.value ?: 0.0,
+                viewModel.sigmaY.value ?: 0.0
+            )
 
             /* Convert cv::mat to bitmap for drawing */
             val bitmap: Bitmap =
@@ -190,7 +174,7 @@ class GaussianBlurFragment : Fragment() {
             Utils.matToBitmap(matOutput, bitmap)
 
             /* Display the result onto ImageView */
-            runOnUiThread { imageView?.setImageBitmap(bitmap) }
+            runOnUiThread { binding.imageView.setImageBitmap(bitmap) }
 
             /* Close the image otherwise, this function is not called next time */
             image.close()
@@ -201,7 +185,6 @@ class GaussianBlurFragment : Fragment() {
             if (!isAdded) return
             activity?.runOnUiThread(action)
         }
-
 
     }
 }
