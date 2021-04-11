@@ -22,6 +22,9 @@ class TitleFragment : Fragment() {
         binding.gaussianBlurButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_gaussianBlurFragment)
         }
+        binding.thresholdButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_thresholdFragment)
+        }
         return binding.root
     }
 }
