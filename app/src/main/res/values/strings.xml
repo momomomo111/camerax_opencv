@@ -3,7 +3,10 @@
     <string name="k_size">ksize: %s</string>
     <string name="sigma_x">sigmaX: %s</string>
     <string name="sigma_y">sigmaY: %s</string>
+    <string name="thresh">thresh: %s</string>
+    <string name="max_val">maxval: %s</string>
     <string name="gaussianblur_nav">GaussianBlur</string>
+    <string name="threshold_nav">Threshold</string>
     <string name="logo_description">opencvのロゴマークです</string>
     <string name="imageview_description">画像処理された画像を表示します</string>
 </resources>

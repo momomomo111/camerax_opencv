@@ -11,9 +11,16 @@
         <action
             android:id="@+id/action_titleFragment_to_gaussianBlurFragment"
             app:destination="@id/gaussianBlurFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_thresholdFragment"
+            app:destination="@id/thresholdFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
         android:name="com.example.camerax_opencv.ui.GaussianBlurFragment"
         android:label="GaussianBlurFragment" />
+    <fragment
+        android:id="@+id/thresholdFragment"
+        android:name="com.example.camerax_opencv.ui.ThresholdFragment"
+        android:label="ThresholdFragment" />
 </navigation>
