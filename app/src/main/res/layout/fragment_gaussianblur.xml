@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.camerax_opencv.data.GausianblurViewModel" />
+            type="com.example.camerax_opencv.data.GaussianblurViewModel" />
 
     </data>
 

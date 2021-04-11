@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GausianblurViewModel : ViewModel() {
+class GaussianblurViewModel : ViewModel() {
     private val _kSize = MutableLiveData(1.0)
     private val _sigmaX = MutableLiveData(0.0)
     private val _sigmaY = MutableLiveData(0.0)

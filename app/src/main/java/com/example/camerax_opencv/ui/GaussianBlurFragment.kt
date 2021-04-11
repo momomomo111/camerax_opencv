@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.example.camerax_opencv.data.GausianblurViewModel
+import com.example.camerax_opencv.data.GaussianblurViewModel
 import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.google.common.util.concurrent.ListenableFuture
@@ -31,7 +31,7 @@ import org.opencv.imgproc.Imgproc
 import java.util.concurrent.Executors
 
 class GaussianBlurFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(GausianblurViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(GaussianblurViewModel::class.java) }
 
     companion object {
 
