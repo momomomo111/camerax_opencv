@@ -59,7 +59,7 @@ class ThresholdFragment : Fragment() {
         seekBarMaxVal.max = 255
         seekBarMaxVal.min = 0
         seekBarMaxVal.progress = 255
-        if (CameraUtil.checkPermissions(context)) {
+        if (CameraUtil.checkPermissions(requireContext())) {
             startCamera()
         } else {
             ActivityResultContracts.RequestPermission()
@@ -103,11 +103,9 @@ class ThresholdFragment : Fragment() {
     }
 
     private fun startCamera() {
+        val context: Context = requireContext()
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
-            ProcessCameraProvider.getInstance(
-                requireContext()
-            )
-        val context: Context? = context
+            ProcessCameraProvider.getInstance(context)
         cameraProviderFuture.addListener({
             try {
                 val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -128,7 +126,7 @@ class ThresholdFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("error", "[startCamera] Use case binding failed", e)
             }
-        }, ContextCompat.getMainExecutor(getContext()))
+        }, ContextCompat.getMainExecutor(context))
     }
 
     private inner class MyImageAnalyzer : ImageAnalysis.Analyzer {

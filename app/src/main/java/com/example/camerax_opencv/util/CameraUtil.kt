@@ -39,7 +39,7 @@ object CameraUtil {
 
     fun fixMatRotation(matOrg: Mat, previewView: PreviewView?): Mat {
         val mat: Mat
-        when (previewView!!.display.rotation) {
+        when (previewView?.display?.rotation) {
             Surface.ROTATION_0 -> {
                 mat = Mat(matOrg.cols(), matOrg.rows(), matOrg.type())
                 Core.transpose(matOrg, mat)
@@ -59,9 +59,9 @@ object CameraUtil {
         return mat
     }
 
-    fun checkPermissions(context: Context?): Boolean {
+    fun checkPermissions(context: Context): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
-            if (context?.let {
+            if (context.let {
                     ContextCompat.checkSelfPermission(
                         it,
                         permission
