@@ -20,5 +20,11 @@
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/navigation" />
         </LinearLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/navdrawer_menu" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
