@@ -7,20 +7,27 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.example.camerax_opencv.ui.TitleFragment"
-        android:label="TitleFragment">
+        android:label="Title">
         <action
             android:id="@+id/action_titleFragment_to_gaussianBlurFragment"
             app:destination="@id/gaussianBlurFragment" />
         <action
             android:id="@+id/action_titleFragment_to_thresholdFragment"
             app:destination="@id/thresholdFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_licenceFragment"
+            app:destination="@id/licenceFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
         android:name="com.example.camerax_opencv.ui.GaussianBlurFragment"
-        android:label="GaussianBlurFragment" />
+        android:label="GaussianBlur" />
     <fragment
         android:id="@+id/thresholdFragment"
         android:name="com.example.camerax_opencv.ui.ThresholdFragment"
-        android:label="ThresholdFragment" />
+        android:label="Threshold" />
+    <fragment
+        android:id="@+id/licenceFragment"
+        android:name="com.example.camerax_opencv.ui.LicenceFragment"
+        android:label="Licence" />
 </navigation>
