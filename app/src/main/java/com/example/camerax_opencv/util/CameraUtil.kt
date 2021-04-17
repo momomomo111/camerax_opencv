@@ -2,15 +2,28 @@ package com.example.camerax_opencv.util
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import android.view.Surface
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import com.example.camerax_opencv.process.GaussianImageAnalyzer
+import com.example.camerax_opencv.ui.GaussianBlurFragment
+import com.google.common.util.concurrent.ListenableFuture
 import org.opencv.core.Core
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 import org.opencv.imgproc.Imgproc
+import java.lang.reflect.TypeVariable
 import java.nio.ByteBuffer
+import java.util.concurrent.Executors
 
 private val REQUIRED_PERMISSIONS = arrayOf(
     "android.permission.CAMERA",
@@ -18,6 +31,32 @@ private val REQUIRED_PERMISSIONS = arrayOf(
 )
 
 object CameraUtil {
+    fun startCamera(context: Context, imageAnalyzer: GaussianImageAnalyzer, provider: Preview.SurfaceProvider) {
+        val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
+            ProcessCameraProvider.getInstance(context)
+        cameraProviderFuture.addListener({
+            try {
+                val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+                val preview = Preview.Builder().build()
+                val imageAnalysis = ImageAnalysis.Builder().build()
+                imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), imageAnalyzer)
+                val cameraSelector =
+                    CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                        .build()
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    (context as LifecycleOwner),
+                    cameraSelector,
+                    preview,
+                    imageAnalysis
+                )
+                preview.setSurfaceProvider(provider)
+            } catch (e: Exception) {
+                Log.e("error", "[startCamera] Use case binding failed", e)
+            }
+        }, ContextCompat.getMainExecutor(context))
+    }
+
     fun getMatFromImage(image: ImageProxy): Mat {
         /* https://stackoverflow.com/questions/30510928/convert-android-camera2-api-yuv-420-888-to-rgb */
         val yBuffer: ByteBuffer = image.planes[0].buffer

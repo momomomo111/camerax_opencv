@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{Double.toString(viewmodel.kSize)}"
+                    bind:set_param="@{viewmodel.liveParams.KSize}"
                     bind:set_type="@{R.string.k_size}" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{Double.toString(viewmodel.sigmaX)}"
+                    bind:set_param="@{viewmodel.liveParams.sigmaX}"
                     bind:set_type="@{R.string.sigma_x}" />
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{Double.toString(viewmodel.sigmaY)}"
+                    bind:set_param="@{viewmodel.liveParams.sigmaY}"
                     bind:set_type="@{R.string.sigma_y}" />
             </LinearLayout>
 

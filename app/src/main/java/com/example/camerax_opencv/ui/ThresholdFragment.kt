@@ -116,13 +116,13 @@ class ThresholdFragment : Fragment() {
                     CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
                         .build()
                 cameraProvider.unbindAll()
-                val camera = cameraProvider.bindToLifecycle(
+                cameraProvider.bindToLifecycle(
                     (context as LifecycleOwner),
                     cameraSelector,
                     preview,
                     imageAnalysis
                 )
-                preview.setSurfaceProvider(binding.previewView.createSurfaceProvider(camera.cameraInfo))
+                preview.setSurfaceProvider(binding.previewView.surfaceProvider)
             } catch (e: Exception) {
                 Log.e("error", "[startCamera] Use case binding failed", e)
             }
