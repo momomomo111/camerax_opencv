@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.camerax_opencv.R
 import com.example.camerax_opencv.databinding.FragmentTitleBinding
+import com.example.camerax_opencv.util.CameraUtil
 
 class TitleFragment : Fragment() {
     override fun onCreateView(
@@ -23,6 +24,9 @@ class TitleFragment : Fragment() {
         }
         binding.thresholdButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_thresholdFragment)
+        }
+        if (!CameraUtil.checkPermissions(requireContext())) {
+            CameraUtil.userRequestPermissions(requireActivity())
         }
         setHasOptionsMenu(true)
         return binding.root

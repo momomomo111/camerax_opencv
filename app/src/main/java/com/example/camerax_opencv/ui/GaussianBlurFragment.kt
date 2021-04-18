@@ -1,20 +1,16 @@
 package com.example.camerax_opencv.ui
 
-import android.Manifest
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.camerax_opencv.data.GaussianblurViewModel
 import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
 import com.example.camerax_opencv.util.CameraUtil
-import com.example.camerax_opencv.util.CameraUtil.startCamera
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class GaussianBlurFragment : Fragment() {
@@ -38,24 +34,19 @@ class GaussianBlurFragment : Fragment() {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        val context: Context = requireContext()
-        if (CameraUtil.checkPermissions(context)) {
-            startCamera(
-                context,
-                ProcessImageAnalyzer(
-                    {
-                        runOnUiThread {
-                            binding.imageView.setImageBitmap(
-                                it
-                            )
-                        }
-                    }, binding.previewView,
-                    viewModel.params
-                ), binding.previewView.surfaceProvider
-            )
-        } else {
-            CameraUtil.userRequestPermissions(requireActivity())
-        }
+        CameraUtil.startCamera(
+            requireContext(),
+            ProcessImageAnalyzer(
+                {
+                    runOnUiThread {
+                        binding.imageView.setImageBitmap(
+                            it
+                        )
+                    }
+                }, binding.previewView,
+                viewModel.params
+            ), binding.previewView.surfaceProvider
+        )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
             // Responds to when slider's value is changed
