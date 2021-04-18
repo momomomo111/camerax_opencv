@@ -1,6 +1,5 @@
 package com.example.camerax_opencv.ui
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,24 +34,19 @@ class ThresholdFragment : Fragment() {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        val context: Context = requireContext()
-        if (CameraUtil.checkPermissions(context)) {
-            CameraUtil.startCamera(
-                context,
-                ProcessImageAnalyzer(
-                    {
-                        runOnUiThread {
-                            binding.imageView.setImageBitmap(
-                                it
-                            )
-                        }
-                    }, binding.previewView,
-                    viewModel.params
-                ), binding.previewView.surfaceProvider
-            )
-        } else {
-            CameraUtil.userRequestPermissions(requireActivity())
-        }
+        CameraUtil.startCamera(
+            requireContext(),
+            ProcessImageAnalyzer(
+                {
+                    runOnUiThread {
+                        binding.imageView.setImageBitmap(
+                            it
+                        )
+                    }
+                }, binding.previewView,
+                viewModel.params
+            ), binding.previewView.surfaceProvider
+        )
 
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
             // Responds to when slider's value is changed
