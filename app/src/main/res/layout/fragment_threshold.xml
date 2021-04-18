@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{Double.toString(viewmodel.thresh)}"
+                    bind:set_param="@{viewmodel.liveParams.thresh}"
                     bind:set_type="@{R.string.thresh}" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{Double.toString(viewmodel.maxVal)}"
+                    bind:set_param="@{viewmodel.liveParams.maxVal}"
                     bind:set_type="@{R.string.max_val}" />
             </LinearLayout>
 
