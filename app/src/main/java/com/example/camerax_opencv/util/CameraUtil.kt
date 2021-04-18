@@ -10,18 +10,13 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import com.example.camerax_opencv.process.GaussianImageAnalyzer
-import com.example.camerax_opencv.ui.GaussianBlurFragment
 import com.google.common.util.concurrent.ListenableFuture
 import org.opencv.core.Core
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 import org.opencv.imgproc.Imgproc
-import java.lang.reflect.TypeVariable
 import java.nio.ByteBuffer
 import java.util.concurrent.Executors
 
@@ -31,7 +26,11 @@ private val REQUIRED_PERMISSIONS = arrayOf(
 )
 
 object CameraUtil {
-    fun startCamera(context: Context, imageAnalyzer: GaussianImageAnalyzer, provider: Preview.SurfaceProvider) {
+    fun startCamera(
+        context: Context,
+        imageAnalyzer: ProcessImageAnalyzer,
+        provider: Preview.SurfaceProvider
+    ) {
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
             ProcessCameraProvider.getInstance(context)
         cameraProviderFuture.addListener({
@@ -111,6 +110,5 @@ object CameraUtil {
         }
         return true
     }
-
 
 }

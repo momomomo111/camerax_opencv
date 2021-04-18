@@ -2,32 +2,21 @@ package com.example.camerax_opencv.ui
 
 import android.Manifest
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.camerax_opencv.data.GaussianblurViewModel
 import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
-import com.example.camerax_opencv.params.Params
-import com.example.camerax_opencv.process.GaussianImageAnalyzer
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.CameraUtil.startCamera
-import kotlinx.coroutines.flow.StateFlow
-import org.opencv.android.Utils
-import org.opencv.core.Mat
-import org.opencv.core.Size
-import org.opencv.imgproc.Imgproc
+import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class GaussianBlurFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(this).get(GaussianblurViewModel::class.java) }
@@ -63,15 +52,17 @@ class GaussianBlurFragment : Fragment() {
         if (CameraUtil.checkPermissions(context)) {
             startCamera(
                 context,
-                GaussianImageAnalyzer({
-                    runOnUiThread({
-                        binding.imageView.setImageBitmap(
-                            it
-                        )
-                    })
-                }, binding.previewView,
+                ProcessImageAnalyzer(
+                    {
+                        runOnUiThread {
+                            binding.imageView.setImageBitmap(
+                                it
+                            )
+                        }
+                    }, binding.previewView,
                     viewModel.params
-                ),binding.previewView.surfaceProvider)
+                ), binding.previewView.surfaceProvider
+            )
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),

@@ -1,18 +1,17 @@
-package com.example.camerax_opencv.process
+package com.example.camerax_opencv.util
 
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.PreviewView
-import com.example.camerax_opencv.params.Params
-import com.example.camerax_opencv.util.CameraUtil
+import com.example.camerax_opencv.data.Params
 import kotlinx.coroutines.flow.StateFlow
 import org.opencv.android.Utils
 import org.opencv.core.Mat
 import org.opencv.core.Size
 import org.opencv.imgproc.Imgproc
 
-class GaussianImageAnalyzer(
+class ProcessImageAnalyzer(
     val runOnUiThread: (Bitmap) -> Unit,
     val previewView: PreviewView?,
     val params: StateFlow<Params>
@@ -27,14 +26,16 @@ class GaussianImageAnalyzer(
         /* Do some image processing */
         val matOutput = Mat(mat.rows(), mat.cols(), mat.type())
         val params = params.value
-        if (params is Params.GaussianBlurParams){
-        Imgproc.GaussianBlur(
-            mat,
-            matOutput,
-            Size(params.kSize, params.kSize),
-            params.sigmaX,
-            params.sigmaY
-        )} else if (params is Params.ThresholdParams){
+        if (params is Params.GaussianBlurParams) {
+            Imgproc.GaussianBlur(
+                mat,
+                matOutput,
+                Size(params.kSize, params.kSize),
+                params.sigmaX,
+                params.sigmaY
+            )
+        } else if (params is Params.ThresholdParams) {
+            Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
             Imgproc.threshold(
                 mat,
                 matOutput,
@@ -43,7 +44,6 @@ class GaussianImageAnalyzer(
                 0
             )
         }
-
         /* Convert cv::mat to bitmap for drawing */
         val bitmap: Bitmap =
             Bitmap.createBitmap(matOutput.cols(), matOutput.rows(), Bitmap.Config.ARGB_8888)
