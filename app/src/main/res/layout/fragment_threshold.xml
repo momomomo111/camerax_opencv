@@ -72,17 +72,25 @@
                 android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
-                <SeekBar
-                    android:id="@+id/seekBarThresh"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderThresh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:value="128.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="255.0" />
 
-                <SeekBar
-                    android:id="@+id/seekBarMaxVal"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderMaxVal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:value="255.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="255.0" />
             </LinearLayout>
         </LinearLayout>
 

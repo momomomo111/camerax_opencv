@@ -82,23 +82,33 @@
                 android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
-                <SeekBar
-                    android:id="@+id/seekBarKSize"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderKSize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:stepSize="2.0"
+                    android:valueFrom="1.0"
+                    android:valueTo="51.0" />
 
-                <SeekBar
-                    android:id="@+id/seekBarSigmaX"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderSigmaX"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="50.0" />
 
-                <SeekBar
-                    android:id="@+id/seekBarSigmaY"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderSigmaY"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="50.0" />
+
             </LinearLayout>
         </LinearLayout>
 

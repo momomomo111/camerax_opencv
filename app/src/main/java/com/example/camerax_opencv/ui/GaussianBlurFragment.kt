@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -39,15 +38,6 @@ class GaussianBlurFragment : Fragment() {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        val seekBarKSize = binding.seekBarKSize
-        val seekBarSigmaX = binding.seekBarSigmaX
-        val seekBarSigmaY = binding.seekBarSigmaY
-        seekBarKSize.max = 51
-        seekBarKSize.min = 1
-        seekBarSigmaX.max = 50
-        seekBarSigmaX.min = 0
-        seekBarSigmaY.max = 50
-        seekBarSigmaY.min = 0
         val context: Context = requireContext()
         if (CameraUtil.checkPermissions(context)) {
             startCamera(
@@ -64,68 +54,29 @@ class GaussianBlurFragment : Fragment() {
                 ), binding.previewView.surfaceProvider
             )
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                2000
-            )
+            CameraUtil.userRequestPermissions(requireActivity())
         }
 
-        fun onKSizeChange(data: Double) {
-            viewModel.onKSizeChange(data)
+        binding.sliderKSize.addOnChangeListener { _, value, _ ->
+            // Responds to when slider's value is changed
+            val kSize = value.toDouble()
+            viewModel.onKSizeChange(kSize)
         }
 
-        fun onSigmaXChange(data: Double) {
-            viewModel.onSigmaXChange(data)
+        binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
+            // Responds to when slider's value is changed
+            val sigmaX = value.toDouble()
+            viewModel.onSigmaXChange(sigmaX)
         }
 
-        fun onSigmaYChange(data: Double) {
-            viewModel.onSigmaYChange(data)
+        binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
+            // Responds to when slider's value is changed
+            val sigmaY = value.toDouble()
+            viewModel.onSigmaYChange(sigmaY)
         }
-        seekBarKSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val kSize = progress.toDouble()
-                if (kSize % 2 != 0.0) {
-                    onKSizeChange(kSize)
-                }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
-        seekBarSigmaX.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val sigmaX = progress.toDouble()
-                onSigmaXChange(sigmaX)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
-        seekBarSigmaY.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val sigmaY = progress.toDouble()
-                onSigmaYChange(sigmaY)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
         return binding.root
     }
-
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
