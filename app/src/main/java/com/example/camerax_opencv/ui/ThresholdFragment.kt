@@ -1,15 +1,12 @@
 package com.example.camerax_opencv.ui
 
-import android.Manifest
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.camerax_opencv.data.ThresholdViewModel
@@ -38,15 +35,6 @@ class ThresholdFragment : Fragment() {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-        val seekBarThresh = binding.seekBarThresh
-        val seekBarMaxVal = binding.seekBarMaxVal
-
-        seekBarThresh.max = 255
-        seekBarThresh.min = 0
-        seekBarThresh.progress = 128
-        seekBarMaxVal.max = 255
-        seekBarMaxVal.min = 0
-        seekBarMaxVal.progress = 255
         val context: Context = requireContext()
         if (CameraUtil.checkPermissions(context)) {
             CameraUtil.startCamera(
@@ -63,47 +51,20 @@ class ThresholdFragment : Fragment() {
                 ), binding.previewView.surfaceProvider
             )
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                2000
-            )
+            CameraUtil.userRequestPermissions(requireActivity())
         }
 
-        fun onThreshChange(data: Double) {
-            viewModel.onThreshChange(data)
+        binding.sliderThresh.addOnChangeListener { _, value, _ ->
+            // Responds to when slider's value is changed
+            val thresh = value.toDouble()
+            viewModel.onThreshChange(thresh)
+        }
+        binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
+            // Responds to when slider's value is changed
+            val maxVal = value.toDouble()
+            viewModel.onMaxValChange(maxVal)
         }
 
-        fun onMaxValChange(data: Double) {
-            viewModel.onMaxValChange(data)
-        }
-
-        seekBarThresh.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val thresh = progress.toDouble()
-                onThreshChange(thresh)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
-        seekBarMaxVal.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val maxVal = progress.toDouble()
-                onMaxValChange(maxVal)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-        })
         return binding.root
     }
 
