@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_titleFragment_to_licenceFragment"
             app:destination="@id/licenceFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_cannyFragment"
+            app:destination="@id/cannyFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -30,4 +33,8 @@
         android:id="@+id/licenceFragment"
         android:name="com.example.camerax_opencv.ui.LicenceFragment"
         android:label="Licence" />
+    <fragment
+        android:id="@+id/cannyFragment"
+        android:name="com.example.camerax_opencv.ui.CannyFragment"
+        android:label="CannyFragment" />
 </navigation>

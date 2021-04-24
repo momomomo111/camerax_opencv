@@ -5,8 +5,11 @@
     <string name="sigma_y">sigmaY: %s</string>
     <string name="thresh">thresh: %s</string>
     <string name="max_val">maxval: %s</string>
+    <string name="threshold1">threshold1: %s</string>
+    <string name="threshold2">threshold2: %s</string>
     <string name="gaussianblur_nav">GaussianBlur</string>
     <string name="threshold_nav">Threshold</string>
+    <string name="canny_nav">Canny</string>
     <string name="logo_description">opencvのロゴマークです</string>
     <string name="imageview_description">画像処理された画像を表示します</string>
     <string name="licence">Licence</string>

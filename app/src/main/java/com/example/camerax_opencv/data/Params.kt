@@ -5,6 +5,5 @@ sealed class Params {
         Params()
 
     data class ThresholdParams(val thresh: Double, val maxVal: Double) : Params()
+    data class CannyParams(val threshold1: Double, val threshold2: Double) : Params()
 }
-
-

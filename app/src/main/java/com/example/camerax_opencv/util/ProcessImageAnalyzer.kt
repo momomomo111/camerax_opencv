@@ -43,6 +43,14 @@ class ProcessImageAnalyzer(
                 params.maxVal,
                 0
             )
+        } else if (params is Params.CannyParams) {
+            Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
+            Imgproc.Canny(
+                mat,
+                matOutput,
+                params.threshold1,
+                params.threshold2
+            )
         }
         /* Convert cv::mat to bitmap for drawing */
         val bitmap: Bitmap =
