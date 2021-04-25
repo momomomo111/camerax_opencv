@@ -51,6 +51,8 @@ class ProcessImageAnalyzer(
                 params.threshold1,
                 params.threshold2
             )
+        } else if (params is Params.GrayScaleParams) {
+            Imgproc.cvtColor(mat, matOutput, Imgproc.COLOR_RGB2GRAY)
         }
         /* Convert cv::mat to bitmap for drawing */
         val bitmap: Bitmap =

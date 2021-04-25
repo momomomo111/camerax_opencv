@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_titleFragment_to_cannyFragment"
             app:destination="@id/cannyFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_grayScaleFragment"
+            app:destination="@id/grayScaleFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -36,5 +39,9 @@
     <fragment
         android:id="@+id/cannyFragment"
         android:name="com.example.camerax_opencv.ui.CannyFragment"
-        android:label="CannyFragment" />
+        android:label="Canny" />
+    <fragment
+        android:id="@+id/grayScaleFragment"
+        android:name="com.example.camerax_opencv.ui.GrayScaleFragment"
+        android:label="GrayScale" />
 </navigation>

@@ -28,6 +28,9 @@ class TitleFragment : Fragment() {
         binding.cannyButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_cannyFragment)
         }
+        binding.grayScaleButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_grayScaleFragment)
+        }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())
         }
