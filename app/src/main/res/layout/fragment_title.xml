@@ -65,8 +65,16 @@
                 android:layout_weight="1"
                 android:text="@string/grayscale_nav"
                 android:textAllCaps="false" />
-        </LinearLayout>
 
+            <Button
+                android:id="@+id/colorExtractionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/colorextraction_nav"
+                android:textAllCaps="false"
+                android:visibility="gone" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

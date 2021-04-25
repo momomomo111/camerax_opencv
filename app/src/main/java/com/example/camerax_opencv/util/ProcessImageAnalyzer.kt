@@ -1,13 +1,16 @@
 package com.example.camerax_opencv.util
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.PreviewView
 import com.example.camerax_opencv.data.Params
 import kotlinx.coroutines.flow.StateFlow
 import org.opencv.android.Utils
+import org.opencv.core.Core
 import org.opencv.core.Mat
+import org.opencv.core.Scalar
 import org.opencv.core.Size
 import org.opencv.imgproc.Imgproc
 
@@ -22,6 +25,9 @@ class ProcessImageAnalyzer(
 
         /* Fix image rotation (it looks image in PreviewView is automatically fixed by CameraX???) */
         val mat: Mat = CameraUtil.fixMatRotation(matOrg, previewView)
+
+        /* temp mat */
+        val matTemp = Mat(mat.rows(), mat.cols(), mat.type())
 
         /* Do some image processing */
         val matOutput = Mat(mat.rows(), mat.cols(), mat.type())
@@ -53,6 +59,14 @@ class ProcessImageAnalyzer(
             )
         } else if (params is Params.GrayScaleParams) {
             Imgproc.cvtColor(mat, matOutput, Imgproc.COLOR_RGB2GRAY)
+        } else if (params is Params.ColorExtractionParams) {
+            val sMin = Scalar(params.lowerR, params.lowerG, params.lowerB)
+            val sMax = Scalar(params.upperR, params.upperG, params.upperB)
+            Log.i("mat!!!", mat.toString())
+            Core.inRange(mat, sMin, sMax, matOutput)
+            Log.i("matOutput!!!", matOutput.toString())
+            Log.i("lower", sMin.toString())
+            Log.i("upper", sMax.toString())
         }
         /* Convert cv::mat to bitmap for drawing */
         val bitmap: Bitmap =
