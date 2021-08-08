@@ -17,6 +17,15 @@
         <action
             android:id="@+id/action_titleFragment_to_licenceFragment"
             app:destination="@id/licenceFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_cannyFragment"
+            app:destination="@id/cannyFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_grayScaleFragment"
+            app:destination="@id/grayScaleFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_colorExtractionFragment"
+            app:destination="@id/colorExtractionFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -30,4 +39,16 @@
         android:id="@+id/licenceFragment"
         android:name="com.example.camerax_opencv.ui.LicenceFragment"
         android:label="Licence" />
+    <fragment
+        android:id="@+id/cannyFragment"
+        android:name="com.example.camerax_opencv.ui.CannyFragment"
+        android:label="Canny" />
+    <fragment
+        android:id="@+id/grayScaleFragment"
+        android:name="com.example.camerax_opencv.ui.GrayScaleFragment"
+        android:label="GrayScale" />
+    <fragment
+        android:id="@+id/colorExtractionFragment"
+        android:name="com.example.camerax_opencv.ui.ColorExtractionFragment"
+        android:label="ColorExtractionFragment" />
 </navigation>

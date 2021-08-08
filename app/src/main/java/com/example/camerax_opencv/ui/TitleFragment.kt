@@ -25,6 +25,15 @@ class TitleFragment : Fragment() {
         binding.thresholdButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_thresholdFragment)
         }
+        binding.cannyButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_cannyFragment)
+        }
+        binding.grayScaleButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_grayScaleFragment)
+        }
+        binding.colorExtractionButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_colorExtractionFragment)
+        }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())
         }
