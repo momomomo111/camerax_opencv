@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.camerax_opencv"
+        applicationId "com.momomomo111.camerax_opencv"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
