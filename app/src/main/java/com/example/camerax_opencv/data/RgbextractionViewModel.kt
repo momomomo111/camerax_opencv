@@ -6,10 +6,11 @@ import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class ColorextractionViewModel : ViewModel() {
-    private val _params = MutableStateFlow(Params.ColorExtractionParams(255.0, 255.0, 255.0, 0.0, 0.0, 0.0))
-    val params: StateFlow<Params.ColorExtractionParams> = _params
-    val liveParams: LiveData<Params.ColorExtractionParams> = _params.asLiveData()
+class RgbextractionViewModel : ViewModel() {
+    private val _params =
+        MutableStateFlow(Params.RgbExtractionParams(255.0, 255.0, 255.0, 0.0, 0.0, 0.0))
+    val params: StateFlow<Params.RgbExtractionParams> = _params
+    val liveParams: LiveData<Params.RgbExtractionParams> = _params.asLiveData()
 
     fun onUpperRChange(data: Double) {
         _params.value = _params.value.copy(upperR = data)

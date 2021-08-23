@@ -24,8 +24,8 @@
             android:id="@+id/action_titleFragment_to_grayScaleFragment"
             app:destination="@id/grayScaleFragment" />
         <action
-            android:id="@+id/action_titleFragment_to_colorExtractionFragment"
-            app:destination="@id/colorExtractionFragment" />
+            android:id="@+id/action_titleFragment_to_rgbExtractionFragment"
+            app:destination="@id/rgbExtractionFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -48,7 +48,7 @@
         android:name="com.example.camerax_opencv.ui.GrayScaleFragment"
         android:label="GrayScale" />
     <fragment
-        android:id="@+id/colorExtractionFragment"
-        android:name="com.example.camerax_opencv.ui.ColorExtractionFragment"
-        android:label="ColorExtractionFragment" />
+        android:id="@+id/rgbExtractionFragment"
+        android:name="com.example.camerax_opencv.ui.RgbExtractionFragment"
+        android:label="RgbExtraction" />
 </navigation>

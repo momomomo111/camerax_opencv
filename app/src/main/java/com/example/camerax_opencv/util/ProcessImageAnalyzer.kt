@@ -1,7 +1,6 @@
 package com.example.camerax_opencv.util
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.PreviewView
@@ -20,63 +19,54 @@ class ProcessImageAnalyzer(
     val params: StateFlow<Params>
 ) : ImageAnalysis.Analyzer {
     override fun analyze(image: ImageProxy) {
-        /* Create cv::mat(RGB888) from image(NV21) */
         val matOrg: Mat = CameraUtil.getMatFromImage(image)
-
-        /* Fix image rotation (it looks image in PreviewView is automatically fixed by CameraX???) */
         val mat: Mat = CameraUtil.fixMatRotation(matOrg, previewView)
-
-        /* temp mat */
-        val matTemp = Mat(mat.rows(), mat.cols(), mat.type())
-
-        /* Do some image processing */
+        val matMask = Mat(mat.rows(), mat.cols(), 0)
         val matOutput = Mat(mat.rows(), mat.cols(), mat.type())
-        val params = params.value
-        if (params is Params.GaussianBlurParams) {
-            Imgproc.GaussianBlur(
-                mat,
-                matOutput,
-                Size(params.kSize, params.kSize),
-                params.sigmaX,
-                params.sigmaY
-            )
-        } else if (params is Params.ThresholdParams) {
-            Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
-            Imgproc.threshold(
-                mat,
-                matOutput,
-                params.thresh,
-                params.maxVal,
-                0
-            )
-        } else if (params is Params.CannyParams) {
-            Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
-            Imgproc.Canny(
-                mat,
-                matOutput,
-                params.threshold1,
-                params.threshold2
-            )
-        } else if (params is Params.GrayScaleParams) {
-            Imgproc.cvtColor(mat, matOutput, Imgproc.COLOR_RGB2GRAY)
-        } else if (params is Params.ColorExtractionParams) {
-            val sMin = Scalar(params.lowerR, params.lowerG, params.lowerB)
-            val sMax = Scalar(params.upperR, params.upperG, params.upperB)
-            Log.i("mat!!!", mat.toString())
-            Core.inRange(mat, sMin, sMax, matOutput)
-            Log.i("matOutput!!!", matOutput.toString())
-            Log.i("lower", sMin.toString())
-            Log.i("upper", sMax.toString())
+
+        when (val params = params.value) {
+            is Params.GaussianBlurParams -> {
+                Imgproc.GaussianBlur(
+                    mat,
+                    matOutput,
+                    Size(params.kSize, params.kSize),
+                    params.sigmaX,
+                    params.sigmaY
+                )
+            }
+            is Params.ThresholdParams -> {
+                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
+                Imgproc.threshold(
+                    mat,
+                    matOutput,
+                    params.thresh,
+                    params.maxVal,
+                    0
+                )
+            }
+            is Params.CannyParams -> {
+                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY)
+                Imgproc.Canny(
+                    mat,
+                    matOutput,
+                    params.threshold1,
+                    params.threshold2
+                )
+            }
+            is Params.GrayScaleParams -> {
+                Imgproc.cvtColor(mat, matOutput, Imgproc.COLOR_RGB2GRAY)
+            }
+            is Params.RgbExtractionParams -> {
+                val sMin = Scalar(params.lowerR, params.lowerG, params.lowerB)
+                val sMax = Scalar(params.upperR, params.upperG, params.upperB)
+                Core.inRange(mat, sMin, sMax, matMask)
+                Core.bitwise_and(mat, mat, matOutput, matMask)
+            }
         }
-        /* Convert cv::mat to bitmap for drawing */
         val bitmap: Bitmap =
             Bitmap.createBitmap(matOutput.cols(), matOutput.rows(), Bitmap.Config.ARGB_8888)
         Utils.matToBitmap(matOutput, bitmap)
-
-        /* Display the result onto ImageView */
         runOnUiThread(bitmap)
-
-        /* Close the image otherwise, this function is not called next time */
         image.close()
     }
 

@@ -31,8 +31,8 @@ class TitleFragment : Fragment() {
         binding.grayScaleButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_grayScaleFragment)
         }
-        binding.colorExtractionButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_colorExtractionFragment)
+        binding.rgbExtractionButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_rgbExtractionFragment)
         }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())

@@ -199,5 +199,5 @@
     <string name="licence">Licence</string>
     <string name="opencv_licence_description">OpenCV LICENCE</string>
     <string name="grayscale_nav">GrayScale</string>
-    <string name="colorextraction_nav">ColorExtraction</string>
+    <string name="rgbextraction_nav">RGBExtraction</string>
 </resources>

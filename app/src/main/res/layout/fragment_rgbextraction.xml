@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.camerax_opencv.data.ColorextractionViewModel" />
+            type="com.example.camerax_opencv.data.RgbextractionViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="32dp"
-        tools:context=".GaussianBlurFragment">
+        tools:context=".RgbExtractionFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.camerax_opencv.data.ColorextractionViewModel
-import com.example.camerax_opencv.databinding.FragmentColorextractionBinding
+import com.example.camerax_opencv.data.RgbextractionViewModel
+import com.example.camerax_opencv.databinding.FragmentRgbextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
-class ColorExtractionFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(ColorextractionViewModel::class.java) }
+class RgbExtractionFragment : Fragment() {
+    private val viewModel by lazy { ViewModelProvider(this).get(RgbextractionViewModel::class.java) }
 
     companion object {
 
@@ -23,7 +23,7 @@ class ColorExtractionFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentColorextractionBinding? = null
+    private var _binding: FragmentRgbextractionBinding? = null
     private val binding get() = _binding!!
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -31,7 +31,7 @@ class ColorExtractionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentColorextractionBinding.inflate(inflater, container, false)
+        _binding = FragmentRgbextractionBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         CameraUtil.startCamera(
