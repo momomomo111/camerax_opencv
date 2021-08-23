@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_titleFragment_to_rgbExtractionFragment"
             app:destination="@id/rgbExtractionFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_hsvExtractionFragment"
+            app:destination="@id/hsvExtractionFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -51,4 +54,8 @@
         android:id="@+id/rgbExtractionFragment"
         android:name="com.example.camerax_opencv.ui.RgbExtractionFragment"
         android:label="RgbExtraction" />
+    <fragment
+        android:id="@+id/hsvExtractionFragment"
+        android:name="com.example.camerax_opencv.ui.HsvExtractionFragment"
+        android:label="HsvExtraction" />
 </navigation>

@@ -17,4 +17,13 @@ sealed class Params {
         val lowerG: Double,
         val lowerB: Double
     ) : Params()
+
+    data class HsvExtractionParams(
+        val upperH: Double,
+        val upperS: Double,
+        val upperV: Double,
+        val lowerH: Double,
+        val lowerS: Double,
+        val lowerV: Double
+    ) : Params()
 }

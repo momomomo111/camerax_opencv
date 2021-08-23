@@ -73,6 +73,14 @@
                 android:layout_weight="1"
                 android:text="@string/rgbextraction_nav"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/hsvExtractionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hsvextraction_nav"
+                android:textAllCaps="false" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

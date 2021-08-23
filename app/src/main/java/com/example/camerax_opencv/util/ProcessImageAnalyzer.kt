@@ -22,6 +22,7 @@ class ProcessImageAnalyzer(
         val matOrg: Mat = CameraUtil.getMatFromImage(image)
         val mat: Mat = CameraUtil.fixMatRotation(matOrg, previewView)
         val matMask = Mat(mat.rows(), mat.cols(), 0)
+        val matTemp = Mat(mat.rows(), mat.cols(), mat.type())
         val matOutput = Mat(mat.rows(), mat.cols(), mat.type())
 
         when (val params = params.value) {
@@ -61,6 +62,14 @@ class ProcessImageAnalyzer(
                 val sMax = Scalar(params.upperR, params.upperG, params.upperB)
                 Core.inRange(mat, sMin, sMax, matMask)
                 Core.bitwise_and(mat, mat, matOutput, matMask)
+            }
+            is Params.HsvExtractionParams -> {
+                val sMin = Scalar(params.lowerH, params.lowerS, params.lowerV)
+                val sMax = Scalar(params.upperH, params.upperS, params.upperV)
+                Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2HSV)
+                Core.inRange(mat, sMin, sMax, matMask)
+                Core.bitwise_and(mat, mat, matTemp, matMask)
+                Imgproc.cvtColor(matTemp, matOutput, Imgproc.COLOR_HSV2RGB)
             }
         }
         val bitmap: Bitmap =

@@ -34,6 +34,9 @@ class TitleFragment : Fragment() {
         binding.rgbExtractionButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_rgbExtractionFragment)
         }
+        binding.hsvExtractionButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_hsvExtractionFragment)
+        }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())
         }

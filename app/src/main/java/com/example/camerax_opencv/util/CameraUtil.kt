@@ -60,7 +60,6 @@ object CameraUtil {
     }
 
     fun getMatFromImage(image: ImageProxy): Mat {
-        /* https://stackoverflow.com/questions/30510928/convert-android-camera2-api-yuv-420-888-to-rgb */
         val yBuffer: ByteBuffer = image.planes[0].buffer
         val uBuffer: ByteBuffer = image.planes[1].buffer
         val vBuffer: ByteBuffer = image.planes[2].buffer
