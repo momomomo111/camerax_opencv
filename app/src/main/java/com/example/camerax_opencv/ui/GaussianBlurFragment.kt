@@ -28,7 +28,8 @@ class GaussianBlurFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
@@ -43,9 +44,11 @@ class GaussianBlurFragment : Fragment() {
                             it
                         )
                     }
-                }, binding.previewView,
+                },
+                binding.previewView,
                 viewModel.params
-            ), binding.previewView.surfaceProvider
+            ),
+            binding.previewView.surfaceProvider
         )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->

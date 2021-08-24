@@ -35,5 +35,4 @@ class RgbextractionViewModel : ViewModel() {
     fun onLowerBChange(data: Double) {
         _params.value = _params.value.copy(lowerB = data)
     }
-
 }

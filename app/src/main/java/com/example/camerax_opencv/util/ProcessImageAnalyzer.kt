@@ -78,5 +78,4 @@ class ProcessImageAnalyzer(
         runOnUiThread(bitmap)
         image.close()
     }
-
 }

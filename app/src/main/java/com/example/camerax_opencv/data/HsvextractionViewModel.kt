@@ -35,5 +35,4 @@ class HsvextractionViewModel : ViewModel() {
     fun onLowerVChange(data: Double) {
         _params.value = _params.value.copy(lowerV = data)
     }
-
 }
