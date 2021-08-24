@@ -36,31 +36,33 @@ object CameraUtil {
     ) {
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
             ProcessCameraProvider.getInstance(context)
-        cameraProviderFuture.addListener({
-            try {
-                val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-                val preview = Preview.Builder().build()
-                val imageAnalysis = ImageAnalysis.Builder().build()
-                imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), imageAnalyzer)
-                val cameraSelector =
-                    CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                        .build()
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    (context as LifecycleOwner),
-                    cameraSelector,
-                    preview,
-                    imageAnalysis
-                )
-                preview.setSurfaceProvider(provider)
-            } catch (e: Exception) {
-                Log.e("error", "[startCamera] Use case binding failed", e)
-            }
-        }, ContextCompat.getMainExecutor(context))
+        cameraProviderFuture.addListener(
+            {
+                try {
+                    val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+                    val preview = Preview.Builder().build()
+                    val imageAnalysis = ImageAnalysis.Builder().build()
+                    imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), imageAnalyzer)
+                    val cameraSelector =
+                        CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                            .build()
+                    cameraProvider.unbindAll()
+                    cameraProvider.bindToLifecycle(
+                        (context as LifecycleOwner),
+                        cameraSelector,
+                        preview,
+                        imageAnalysis
+                    )
+                    preview.setSurfaceProvider(provider)
+                } catch (e: Exception) {
+                    Log.e("error", "[startCamera] Use case binding failed", e)
+                }
+            },
+            ContextCompat.getMainExecutor(context)
+        )
     }
 
     fun getMatFromImage(image: ImageProxy): Mat {
-        /* https://stackoverflow.com/questions/30510928/convert-android-camera2-api-yuv-420-888-to-rgb */
         val yBuffer: ByteBuffer = image.planes[0].buffer
         val uBuffer: ByteBuffer = image.planes[1].buffer
         val vBuffer: ByteBuffer = image.planes[2].buffer
@@ -103,11 +105,12 @@ object CameraUtil {
     fun checkPermissions(context: Context): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (context.let {
-                    ContextCompat.checkSelfPermission(
+                ContextCompat.checkSelfPermission(
                         it,
                         permission
                     )
-                } != PackageManager.PERMISSION_GRANTED) {
+            } != PackageManager.PERMISSION_GRANTED
+            ) {
                 return false
             }
         }
@@ -121,5 +124,4 @@ object CameraUtil {
             2000
         )
     }
-
 }

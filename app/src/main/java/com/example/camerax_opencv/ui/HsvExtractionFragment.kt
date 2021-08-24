@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.camerax_opencv.data.GaussianblurViewModel
-import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
+import com.example.camerax_opencv.data.HsvextractionViewModel
+import com.example.camerax_opencv.databinding.FragmentHsvextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
-class GaussianBlurFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(GaussianblurViewModel::class.java) }
+class HsvExtractionFragment : Fragment() {
+    private val viewModel by lazy { ViewModelProvider(this).get(HsvextractionViewModel::class.java) }
 
     companion object {
 
@@ -23,7 +23,7 @@ class GaussianBlurFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentGaussianblurBinding? = null
+    private var _binding: FragmentHsvextractionBinding? = null
     private val binding get() = _binding!!
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -32,7 +32,7 @@ class GaussianBlurFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
+        _binding = FragmentHsvextractionBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         CameraUtil.startCamera(
@@ -51,22 +51,34 @@ class GaussianBlurFragment : Fragment() {
             binding.previewView.surfaceProvider
         )
 
-        binding.sliderKSize.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
-            val kSize = value.toDouble()
-            viewModel.onKSizeChange(kSize)
+        val sliderH = binding.sliderH
+        sliderH.setValues(0.0F, 255.0F)
+        sliderH.addOnChangeListener { _, _, _ ->
+            val values = sliderH.values
+            val upperH = values[1].toDouble()
+            val lowerH = values[0].toDouble()
+            viewModel.onUpperHChange(upperH)
+            viewModel.onLowerHChange(lowerH)
         }
 
-        binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
-            val sigmaX = value.toDouble()
-            viewModel.onSigmaXChange(sigmaX)
+        val sliderS = binding.sliderS
+        sliderS.setValues(0.0F, 255.0F)
+        sliderS.addOnChangeListener { _, _, _ ->
+            val values = sliderS.values
+            val upperS = values[1].toDouble()
+            val lowerS = values[0].toDouble()
+            viewModel.onUpperSChange(upperS)
+            viewModel.onLowerSChange(lowerS)
         }
 
-        binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
-            val sigmaY = value.toDouble()
-            viewModel.onSigmaYChange(sigmaY)
+        val sliderV = binding.sliderV
+        sliderV.setValues(0.0F, 255.0F)
+        sliderV.addOnChangeListener { _, _, _ ->
+            val values = sliderV.values
+            val upperV = values[1].toDouble()
+            val lowerV = values[0].toDouble()
+            viewModel.onUpperVChange(upperV)
+            viewModel.onLowerVChange(lowerV)
         }
 
         return binding.root

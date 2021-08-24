@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.camerax_opencv.R" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.camerax_opencv.data.RgbextractionViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"
+        tools:context=".RgbExtractionFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="664dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/imageview_description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/UpperRText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.upperR}"
+                    bind:set_type="@{R.string.upper_r}" />
+
+                <TextView
+                    android:id="@+id/UpperGText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.upperG}"
+                    bind:set_type="@{R.string.upper_g}" />
+
+                <TextView
+                    android:id="@+id/UpperBText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.upperB}"
+                    bind:set_type="@{R.string.upper_b}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/LowerRText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.lowerR}"
+                    bind:set_type="@{R.string.lower_r}" />
+
+                <TextView
+                    android:id="@+id/LowerGText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.lowerG}"
+                    bind:set_type="@{R.string.lower_g}" />
+
+                <TextView
+                    android:id="@+id/LowerBText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    bind:set_param="@{viewmodel.liveParams.lowerB}"
+                    bind:set_type="@{R.string.lower_b}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/sliderR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="255.0" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/sliderG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="255.0" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/sliderB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:stepSize="1.0"
+                    android:valueFrom="0.0"
+                    android:valueTo="255.0" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

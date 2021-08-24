@@ -28,7 +28,8 @@ class GrayScaleFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGrayscaleBinding.inflate(inflater, container, false)
@@ -43,9 +44,11 @@ class GrayScaleFragment : Fragment() {
                             it
                         )
                     }
-                }, binding.previewView,
+                },
+                binding.previewView,
                 viewModel.params
-            ), binding.previewView.surfaceProvider
+            ),
+            binding.previewView.surfaceProvider
         )
 
         return binding.root
@@ -56,5 +59,4 @@ class GrayScaleFragment : Fragment() {
         if (!isAdded) return
         activity?.runOnUiThread(action)
     }
-
 }

@@ -1,7 +1,12 @@
 package com.example.camerax_opencv.ui
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -12,9 +17,10 @@ import com.example.camerax_opencv.util.CameraUtil
 
 class TitleFragment : Fragment() {
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentTitleBinding>(
             inflater,
             R.layout.fragment_title, container, false
@@ -31,8 +37,11 @@ class TitleFragment : Fragment() {
         binding.grayScaleButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_grayScaleFragment)
         }
-        binding.colorExtractionButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_colorExtractionFragment)
+        binding.rgbExtractionButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_rgbExtractionFragment)
+        }
+        binding.hsvExtractionButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_hsvExtractionFragment)
         }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())
@@ -47,7 +56,7 @@ class TitleFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
-                || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) ||
+            super.onOptionsItemSelected(item)
     }
 }

@@ -28,7 +28,8 @@ class ThresholdFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
@@ -43,9 +44,11 @@ class ThresholdFragment : Fragment() {
                             it
                         )
                     }
-                }, binding.previewView,
+                },
+                binding.previewView,
                 viewModel.params
-            ), binding.previewView.surfaceProvider
+            ),
+            binding.previewView.surfaceProvider
         )
 
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
@@ -67,5 +70,4 @@ class ThresholdFragment : Fragment() {
         if (!isAdded) return
         activity?.runOnUiThread(action)
     }
-
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.camerax_opencv.data.ColorextractionViewModel" />
+            type="com.example.camerax_opencv.data.HsvextractionViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="32dp"
-        tools:context=".GaussianBlurFragment">
+        tools:context=".RgbExtractionFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,8 +51,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.upperR}"
-                    bind:set_type="@{R.string.upper_r}" />
+                    bind:set_param="@{viewmodel.liveParams.upperH}"
+                    bind:set_type="@{R.string.upper_h}" />
 
                 <TextView
                     android:id="@+id/UpperGText"
@@ -61,8 +61,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.upperG}"
-                    bind:set_type="@{R.string.upper_g}" />
+                    bind:set_param="@{viewmodel.liveParams.upperS}"
+                    bind:set_type="@{R.string.upper_s}" />
 
                 <TextView
                     android:id="@+id/UpperBText"
@@ -71,8 +71,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.upperB}"
-                    bind:set_type="@{R.string.upper_b}" />
+                    bind:set_param="@{viewmodel.liveParams.upperV}"
+                    bind:set_type="@{R.string.upper_v}" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,8 +89,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.lowerR}"
-                    bind:set_type="@{R.string.lower_r}" />
+                    bind:set_param="@{viewmodel.liveParams.lowerH}"
+                    bind:set_type="@{R.string.lower_h}" />
 
                 <TextView
                     android:id="@+id/LowerGText"
@@ -99,8 +99,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.lowerG}"
-                    bind:set_type="@{R.string.lower_g}" />
+                    bind:set_param="@{viewmodel.liveParams.lowerS}"
+                    bind:set_type="@{R.string.lower_s}" />
 
                 <TextView
                     android:id="@+id/LowerBText"
@@ -109,8 +109,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.lowerB}"
-                    bind:set_type="@{R.string.lower_b}" />
+                    bind:set_param="@{viewmodel.liveParams.lowerV}"
+                    bind:set_type="@{R.string.lower_v}" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +121,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/sliderR"
+                    android:id="@+id/sliderH"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -130,7 +130,7 @@
                     android:valueTo="255.0" />
 
                 <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/sliderG"
+                    android:id="@+id/sliderS"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -139,7 +139,7 @@
                     android:valueTo="255.0" />
 
                 <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/sliderB"
+                    android:id="@+id/sliderV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

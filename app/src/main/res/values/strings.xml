@@ -191,6 +191,12 @@
     <string name="lower_r">lower_R: \n %s</string>
     <string name="lower_g">lower_G: \n %s</string>
     <string name="lower_b">lower_B: \n %s</string>
+    <string name="upper_h">upper_H: \n %s</string>
+    <string name="upper_s">upper_S: \n %s</string>
+    <string name="upper_v">upper_V: \n %s</string>
+    <string name="lower_h">lower_H: \n %s</string>
+    <string name="lower_s">lower_S: \n %s</string>
+    <string name="lower_v">lower_V: \n %s</string>
     <string name="gaussianblur_nav">GaussianBlur</string>
     <string name="threshold_nav">Threshold</string>
     <string name="canny_nav">Canny</string>
@@ -199,5 +205,6 @@
     <string name="licence">Licence</string>
     <string name="opencv_licence_description">OpenCV LICENCE</string>
     <string name="grayscale_nav">GrayScale</string>
-    <string name="colorextraction_nav">ColorExtraction</string>
+    <string name="rgbextraction_nav">RGBExtraction</string>
+    <string name="hsvextraction_nav">HSVExtraction</string>
 </resources>
