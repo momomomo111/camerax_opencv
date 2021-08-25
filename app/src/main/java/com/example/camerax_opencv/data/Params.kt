@@ -27,4 +27,6 @@ sealed class Params {
     ) : Params()
     data class ErodeParams(val kSize: Int, val iterations: Int) :
         Params()
+    data class DilateParams(val kSize: Int, val iterations: Int) :
+        Params()
 }

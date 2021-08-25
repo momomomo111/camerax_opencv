@@ -81,6 +81,15 @@ class ProcessImageAnalyzer(
                     params.iterations
                 )
             }
+            is Params.DilateParams -> {
+                Imgproc.dilate(
+                    mat,
+                    matOutput,
+                    Mat(params.kSize, params.kSize, 0),
+                    Point(-1.0, -1.0),
+                    params.iterations
+                )
+            }
         }
         val bitmap: Bitmap =
             Bitmap.createBitmap(matOutput.cols(), matOutput.rows(), Bitmap.Config.ARGB_8888)

@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_titleFragment_to_erodeFragment"
             app:destination="@id/erodeFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_dilateFragment"
+            app:destination="@id/dilateFragment" />
     </fragment>
     <fragment
         android:id="@+id/gaussianBlurFragment"
@@ -65,4 +68,8 @@
         android:id="@+id/erodeFragment"
         android:name="com.example.camerax_opencv.ui.ErodeFragment"
         android:label="Erode" />
+    <fragment
+        android:id="@+id/dilateFragment"
+        android:name="com.example.camerax_opencv.ui.DilateFragment"
+        android:label="Dilate" />
 </navigation>
