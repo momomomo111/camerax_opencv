@@ -43,6 +43,12 @@ class TitleFragment : Fragment() {
         binding.hsvExtractionButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_hsvExtractionFragment)
         }
+        binding.erodeButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_erodeFragment)
+        }
+        binding.dilateButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_titleFragment_to_dilateFragment)
+        }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())
         }

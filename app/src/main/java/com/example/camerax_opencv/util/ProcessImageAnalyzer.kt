@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.opencv.android.Utils
 import org.opencv.core.Core
 import org.opencv.core.Mat
+import org.opencv.core.Point
 import org.opencv.core.Scalar
 import org.opencv.core.Size
 import org.opencv.imgproc.Imgproc
@@ -70,6 +71,24 @@ class ProcessImageAnalyzer(
                 Core.inRange(mat, sMin, sMax, matMask)
                 Core.bitwise_and(mat, mat, matTemp, matMask)
                 Imgproc.cvtColor(matTemp, matOutput, Imgproc.COLOR_HSV2RGB)
+            }
+            is Params.ErodeParams -> {
+                Imgproc.erode(
+                    mat,
+                    matOutput,
+                    Mat(params.kSize, params.kSize, 0),
+                    Point(-1.0, -1.0),
+                    params.iterations
+                )
+            }
+            is Params.DilateParams -> {
+                Imgproc.dilate(
+                    mat,
+                    matOutput,
+                    Mat(params.kSize, params.kSize, 0),
+                    Point(-1.0, -1.0),
+                    params.iterations
+                )
             }
         }
         val bitmap: Bitmap =

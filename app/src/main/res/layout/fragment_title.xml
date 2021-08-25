@@ -17,7 +17,7 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:contentDescription="@string/logo_description"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/functionList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +25,7 @@
             app:srcCompat="@drawable/ic_opencv_foreground" />
 
         <LinearLayout
+            android:id="@+id/functionList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -32,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+            >
 
             <Button
                 android:id="@+id/gaussianBlurButton"
@@ -80,6 +81,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/hsvextraction_nav"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/erodeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/erode_nav"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/dilateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dilate_nav"
                 android:textAllCaps="false" />
         </LinearLayout>
 

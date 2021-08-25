@@ -179,10 +179,12 @@
        END OF TERMS AND CONDITIONS\n
     </string>
     <string name="k_size">ksize: %s</string>
+    <string name="kernel">kernel: %s</string>
     <string name="sigma_x">sigmaX: %s</string>
     <string name="sigma_y">sigmaY: %s</string>
     <string name="thresh">thresh: %s</string>
     <string name="max_val">maxval: %s</string>
+    <string name="iterations">iterations: %s</string>
     <string name="threshold1">threshold1: %s</string>
     <string name="threshold2">threshold2: %s</string>
     <string name="upper_r">upper_R: \n %s</string>
@@ -207,4 +209,6 @@
     <string name="grayscale_nav">GrayScale</string>
     <string name="rgbextraction_nav">RGBExtraction</string>
     <string name="hsvextraction_nav">HSVExtraction</string>
+    <string name="erode_nav">Erode</string>
+    <string name="dilate_nav">Dilate</string>
 </resources>
