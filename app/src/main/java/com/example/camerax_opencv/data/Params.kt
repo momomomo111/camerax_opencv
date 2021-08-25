@@ -17,7 +17,6 @@ sealed class Params {
         val lowerG: Double,
         val lowerB: Double
     ) : Params()
-
     data class HsvExtractionParams(
         val upperH: Double,
         val upperS: Double,
@@ -26,4 +25,6 @@ sealed class Params {
         val lowerS: Double,
         val lowerV: Double
     ) : Params()
+    data class ErodeParams(val kSize: Int, val iterations: Int) :
+        Params()
 }

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/fragment_erode.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/fragment_grayscale.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_hsvextraction.xml" value="0.1234375" />
         <entry key="app/src/main/res/layout/fragment_rgbextraction.xml" value="0.1234375" />
