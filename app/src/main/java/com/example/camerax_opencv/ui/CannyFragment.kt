@@ -31,6 +31,12 @@ class CannyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCannyBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -57,8 +63,6 @@ class CannyFragment : Fragment() {
             viewModel.onThreshold2Change(maxVal)
             binding.threshold2.text = getString(R.string.threshold2, maxVal.toString())
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {

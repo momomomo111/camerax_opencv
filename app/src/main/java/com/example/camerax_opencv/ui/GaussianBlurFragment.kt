@@ -31,6 +31,12 @@ class GaussianBlurFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -62,8 +68,6 @@ class GaussianBlurFragment : Fragment() {
             viewModel.onSigmaYChange(sigmaY)
             binding.sigmaYText.text = getString(R.string.sigma_y, sigmaY.toString())
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {

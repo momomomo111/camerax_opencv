@@ -31,6 +31,12 @@ class HsvExtractionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHsvextractionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -82,8 +88,6 @@ class HsvExtractionFragment : Fragment() {
             binding.UpperVText.text = getString(R.string.upper_v, upperV.toString())
             binding.LowerVText.text = getString(R.string.lower_v, lowerV.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

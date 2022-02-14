@@ -31,6 +31,12 @@ class ErodeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentErodeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -57,8 +63,6 @@ class ErodeFragment : Fragment() {
             viewModel.onIterationsChange(iterations)
             binding.iterationsText.text = getString(R.string.iterations, iterations.toString())
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {

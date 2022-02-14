@@ -31,6 +31,12 @@ class ThresholdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -57,8 +63,6 @@ class ThresholdFragment : Fragment() {
             viewModel.onMaxValChange(maxVal)
             binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

@@ -31,6 +31,12 @@ class RgbExtractionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRgbextractionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -82,8 +88,6 @@ class RgbExtractionFragment : Fragment() {
             binding.UpperBText.text = getString(R.string.upper_b, upperB.toString())
             binding.LowerBText.text = getString(R.string.lower_b, lowerB.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
