@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.CannyViewModel
 import com.example.camerax_opencv.databinding.FragmentCannyBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class CannyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCannyBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -49,17 +48,22 @@ class CannyFragment : Fragment() {
         )
 
         binding.sliderThreshold1.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val thresh = value.toDouble()
             viewModel.onThreshold1Change(thresh)
+            binding.threshold1.text = getString(R.string.threshold1, thresh.toString())
         }
         binding.sliderThreshold2.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val maxVal = value.toDouble()
             viewModel.onThreshold2Change(maxVal)
+            binding.threshold2.text = getString(R.string.threshold2, maxVal.toString())
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

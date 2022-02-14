@@ -1,98 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="32dp">
 
-    <data>
-
-        <import type="com.example.camerax_opencv.R" />
-
-        <variable
-            name="viewmodel"
-            type="com.example.camerax_opencv.data.ThresholdViewModel" />
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"
-        tools:context=".GaussianBlurFragment">
+        android:orientation="vertical">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="664dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/imageview_description" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal">
 
-            <androidx.camera.view.PreviewView
-                android:id="@+id/previewView"
+            <TextView
+                android:id="@+id/thresh"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="664dp"
-                android:layout_weight="1"
-                android:contentDescription="@string/imageview_description" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/thresh_128.0"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/thresh"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.thresh}"
-                    bind:set_type="@{R.string.thresh}" />
-
-                <TextView
-                    android:id="@+id/MaxVal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.maxVal}"
-                    bind:set_type="@{R.string.max_val}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/sliderThresh"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:stepSize="1.0"
-                    android:value="128.0"
-                    android:valueFrom="0.0"
-                    android:valueTo="255.0" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/sliderMaxVal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:stepSize="1.0"
-                    android:value="255.0"
-                    android:valueFrom="0.0"
-                    android:valueTo="255.0" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/MaxVal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/max_val_255.0"
+                android:textSize="20sp" />
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderThresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1.0"
+                android:value="128.0"
+                android:valueFrom="0.0"
+                android:valueTo="255.0" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderMaxVal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1.0"
+                android:value="255.0"
+                android:valueFrom="0.0"
+                android:valueTo="255.0" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

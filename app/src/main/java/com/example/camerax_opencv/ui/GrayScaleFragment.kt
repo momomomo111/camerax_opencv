@@ -30,8 +30,6 @@ class GrayScaleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGrayscaleBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -49,6 +47,11 @@ class GrayScaleFragment : Fragment() {
         )
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

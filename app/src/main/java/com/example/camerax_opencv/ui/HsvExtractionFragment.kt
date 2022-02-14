@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.HsvextractionViewModel
 import com.example.camerax_opencv.databinding.FragmentHsvextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class HsvExtractionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHsvextractionBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -56,6 +55,8 @@ class HsvExtractionFragment : Fragment() {
             val lowerH = values[0].toDouble()
             viewModel.onUpperHChange(upperH)
             viewModel.onLowerHChange(lowerH)
+            binding.UpperHText.text = getString(R.string.upper_h, upperH.toString())
+            binding.LowerHText.text = getString(R.string.lower_h, lowerH.toString())
         }
 
         val sliderS = binding.sliderS
@@ -66,6 +67,8 @@ class HsvExtractionFragment : Fragment() {
             val lowerS = values[0].toDouble()
             viewModel.onUpperSChange(upperS)
             viewModel.onLowerSChange(lowerS)
+            binding.UpperSText.text = getString(R.string.upper_s, upperS.toString())
+            binding.LowerSText.text = getString(R.string.lower_s, lowerS.toString())
         }
 
         val sliderV = binding.sliderV
@@ -76,6 +79,8 @@ class HsvExtractionFragment : Fragment() {
             val lowerV = values[0].toDouble()
             viewModel.onUpperVChange(upperV)
             viewModel.onLowerVChange(lowerV)
+            binding.UpperVText.text = getString(R.string.upper_v, upperV.toString())
+            binding.LowerVText.text = getString(R.string.lower_v, lowerV.toString())
         }
 
         return binding.root

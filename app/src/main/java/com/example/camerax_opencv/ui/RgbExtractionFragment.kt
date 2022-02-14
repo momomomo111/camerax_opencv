@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.RgbextractionViewModel
 import com.example.camerax_opencv.databinding.FragmentRgbextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class RgbExtractionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRgbextractionBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -56,6 +55,8 @@ class RgbExtractionFragment : Fragment() {
             val lowerR = values[0].toDouble()
             viewModel.onUpperRChange(upperR)
             viewModel.onLowerRChange(lowerR)
+            binding.UpperRText.text = getString(R.string.upper_r, upperR.toString())
+            binding.LowerRText.text = getString(R.string.lower_r, lowerR.toString())
         }
 
         val sliderG = binding.sliderG
@@ -66,6 +67,8 @@ class RgbExtractionFragment : Fragment() {
             val lowerG = values[0].toDouble()
             viewModel.onUpperGChange(upperG)
             viewModel.onLowerGChange(lowerG)
+            binding.UpperGText.text = getString(R.string.upper_g, upperG.toString())
+            binding.LowerGText.text = getString(R.string.lower_g, lowerG.toString())
         }
 
         val sliderB = binding.sliderB
@@ -76,6 +79,8 @@ class RgbExtractionFragment : Fragment() {
             val lowerB = values[0].toDouble()
             viewModel.onUpperBChange(upperB)
             viewModel.onLowerBChange(lowerB)
+            binding.UpperBText.text = getString(R.string.upper_b, upperB.toString())
+            binding.LowerBText.text = getString(R.string.lower_b, lowerB.toString())
         }
 
         return binding.root

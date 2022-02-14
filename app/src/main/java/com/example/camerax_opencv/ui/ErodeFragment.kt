@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.ErodeViewModel
 import com.example.camerax_opencv.databinding.FragmentErodeBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class ErodeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentErodeBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -49,18 +48,22 @@ class ErodeFragment : Fragment() {
         )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val kSize = value.toInt()
             viewModel.onKSizeChange(kSize)
+            binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
         }
-
         binding.sliderIterations.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val iterations = value.toInt()
             viewModel.onIterationsChange(iterations)
+            binding.iterationsText.text = getString(R.string.iterations, iterations.toString())
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

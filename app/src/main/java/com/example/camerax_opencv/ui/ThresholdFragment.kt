@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.ThresholdViewModel
 import com.example.camerax_opencv.databinding.FragmentThresholdBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class ThresholdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -49,14 +48,14 @@ class ThresholdFragment : Fragment() {
         )
 
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val thresh = value.toDouble()
             viewModel.onThreshChange(thresh)
+            binding.thresh.text = getString(R.string.thresh, thresh.toString())
         }
         binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val maxVal = value.toDouble()
             viewModel.onMaxValChange(maxVal)
+            binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())
         }
 
         return binding.root

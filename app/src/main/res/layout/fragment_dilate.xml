@@ -1,97 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="32dp">
 
-    <data>
-
-        <import type="com.example.camerax_opencv.R" />
-
-        <variable
-            name="viewmodel"
-            type="com.example.camerax_opencv.data.DilateViewModel" />
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"
-        tools:context=".DilateFragment">
+        android:orientation="vertical">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="664dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/imageview_description" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="horizontal">
 
-            <androidx.camera.view.PreviewView
-                android:id="@+id/previewView"
+            <TextView
+                android:id="@+id/kSizeText"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="664dp"
-                android:layout_weight="1"
-                android:contentDescription="@string/imageview_description" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/k_size_1.0"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/kSizeText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.KSize}"
-                    bind:set_type="@{R.string.kernel}" />
-
-                <TextView
-                    android:id="@+id/iterationsText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    bind:set_param="@{viewmodel.liveParams.iterations}"
-                    bind:set_type="@{R.string.iterations}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/sliderKSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:stepSize="1"
-                    android:valueFrom="1"
-                    android:valueTo="51" />
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/sliderIterations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:stepSize="1"
-                    android:valueFrom="1"
-                    android:valueTo="10" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/iterationsText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/iterations_1"
+                android:textSize="20sp" />
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderKSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1"
+                android:valueFrom="1"
+                android:valueTo="51" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderIterations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1"
+                android:valueFrom="1"
+                android:valueTo="10" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

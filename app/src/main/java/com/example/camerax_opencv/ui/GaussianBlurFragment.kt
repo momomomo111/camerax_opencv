@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.GaussianblurViewModel
 import com.example.camerax_opencv.databinding.FragmentGaussianblurBinding
 import com.example.camerax_opencv.util.CameraUtil
@@ -30,8 +31,6 @@ class GaussianBlurFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -49,24 +48,27 @@ class GaussianBlurFragment : Fragment() {
         )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val kSize = value.toDouble()
             viewModel.onKSizeChange(kSize)
+            binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
         }
-
         binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val sigmaX = value.toDouble()
             viewModel.onSigmaXChange(sigmaX)
+            binding.sigmaXText.text = getString(R.string.sigma_x, sigmaX.toString())
         }
-
         binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val sigmaY = value.toDouble()
             viewModel.onSigmaYChange(sigmaY)
+            binding.sigmaYText.text = getString(R.string.sigma_y, sigmaY.toString())
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
