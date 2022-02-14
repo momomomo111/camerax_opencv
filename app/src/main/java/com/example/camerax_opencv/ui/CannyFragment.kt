@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.camerax_opencv.data.CannyViewModel
 import com.example.camerax_opencv.databinding.FragmentCannyBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class CannyFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(CannyViewModel::class.java) }
+    private val viewModel: CannyViewModel by viewModels()
 
     companion object {
 

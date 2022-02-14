@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.camerax_opencv.data.HsvextractionViewModel
 import com.example.camerax_opencv.databinding.FragmentHsvextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class HsvExtractionFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(HsvextractionViewModel::class.java) }
+    private val viewModel: HsvextractionViewModel by viewModels()
 
     companion object {
 
