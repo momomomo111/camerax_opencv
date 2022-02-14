@@ -2,11 +2,12 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:10.2.1")
     }
 }
