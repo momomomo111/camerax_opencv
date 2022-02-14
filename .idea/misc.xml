@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/fragment_canny.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_canny.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_dilate.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_erode.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/fragment_grayscale.xml" value="0.17916666666666667" />
