@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-night/ic_opencv_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_license.xml" value="0.1485" />
+        <entry key="app/src/main/res/drawable/ic_opencv_foreground.xml" value="0.1485" />
         <entry key="app/src/main/res/layout/fragment_canny.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_dilate.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_erode.xml" value="0.17239583333333333" />
