@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/licenceFragment"
         android:icon="@drawable/ic_license"
         android:title="@string/licence" />
+    <item
+        android:id="@+id/vibrationSwitch"
+        android:icon="@drawable/ic_baseline_vibration"
+        android:title="@string/vibration"
+        app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
 </menu>
