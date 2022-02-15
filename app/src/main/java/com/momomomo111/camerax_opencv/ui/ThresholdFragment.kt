@@ -58,6 +58,11 @@ class ThresholdFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return
