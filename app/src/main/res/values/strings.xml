@@ -62,6 +62,7 @@
     <string name="logo_description">opencvのロゴマークです</string>
     <string name="imageview_description">画像処理された画像を表示します</string>
     <string name="licence">Licence</string>
+    <string name="vibration">Vibration</string>
     <string name="opencv_licence_description">OpenCV LICENCE</string>
     <string name="grayscale_nav">GrayScale</string>
     <string name="rgbextraction_nav">RGBExtraction</string>
