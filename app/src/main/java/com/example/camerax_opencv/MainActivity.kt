@@ -2,25 +2,25 @@ package com.example.camerax_opencv
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.camerax_opencv.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        @Suppress("UNUSED_VARIABLE")
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         drawerLayout = binding.drawerLayout
-
-        val navController = this.findNavController(R.id.myNavHostFragment)
-
+        val navController = (
+            supportFragmentManager.findFragmentById(R.id.myNavHostFragment)
+                as NavHostFragment
+            ).navController
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-
         NavigationUI.setupWithNavController(binding.navView, navController)
     }
 

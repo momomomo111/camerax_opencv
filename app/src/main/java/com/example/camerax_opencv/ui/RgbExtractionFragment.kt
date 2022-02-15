@@ -1,20 +1,19 @@
 package com.example.camerax_opencv.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.RgbextractionViewModel
 import com.example.camerax_opencv.databinding.FragmentRgbextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class RgbExtractionFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(RgbextractionViewModel::class.java) }
+    private val viewModel: RgbextractionViewModel by viewModels()
 
     companion object {
 
@@ -26,15 +25,18 @@ class RgbExtractionFragment : Fragment() {
     private var _binding: FragmentRgbextractionBinding? = null
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRgbextractionBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -59,6 +61,8 @@ class RgbExtractionFragment : Fragment() {
             val lowerR = values[0].toDouble()
             viewModel.onUpperRChange(upperR)
             viewModel.onLowerRChange(lowerR)
+            binding.UpperRText.text = getString(R.string.upper_r, upperR.toString())
+            binding.LowerRText.text = getString(R.string.lower_r, lowerR.toString())
         }
 
         val sliderG = binding.sliderG
@@ -69,6 +73,8 @@ class RgbExtractionFragment : Fragment() {
             val lowerG = values[0].toDouble()
             viewModel.onUpperGChange(upperG)
             viewModel.onLowerGChange(lowerG)
+            binding.UpperGText.text = getString(R.string.upper_g, upperG.toString())
+            binding.LowerGText.text = getString(R.string.lower_g, lowerG.toString())
         }
 
         val sliderB = binding.sliderB
@@ -79,9 +85,9 @@ class RgbExtractionFragment : Fragment() {
             val lowerB = values[0].toDouble()
             viewModel.onUpperBChange(upperB)
             viewModel.onLowerBChange(lowerB)
+            binding.UpperBText.text = getString(R.string.upper_b, upperB.toString())
+            binding.LowerBText.text = getString(R.string.lower_b, lowerB.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

@@ -7,7 +7,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -16,15 +15,15 @@ import com.example.camerax_opencv.databinding.FragmentTitleBinding
 import com.example.camerax_opencv.util.CameraUtil
 
 class TitleFragment : Fragment() {
+    private var _binding: FragmentTitleBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(
-            inflater,
-            R.layout.fragment_title, container, false
-        )
+        _binding = FragmentTitleBinding.inflate(inflater, container, false)
         binding.gaussianBlurButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_gaussianBlurFragment)
         }
@@ -54,6 +53,11 @@ class TitleFragment : Fragment() {
         }
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

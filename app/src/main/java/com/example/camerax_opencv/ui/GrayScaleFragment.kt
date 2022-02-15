@@ -1,20 +1,18 @@
 package com.example.camerax_opencv.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.camerax_opencv.data.GrayscaleViewModel
 import com.example.camerax_opencv.databinding.FragmentGrayscaleBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class GrayScaleFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(GrayscaleViewModel::class.java) }
+    private val viewModel: GrayscaleViewModel by viewModels()
 
     companion object {
 
@@ -26,15 +24,18 @@ class GrayScaleFragment : Fragment() {
     private var _binding: FragmentGrayscaleBinding? = null
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGrayscaleBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -50,8 +51,11 @@ class GrayScaleFragment : Fragment() {
             ),
             binding.previewView.surfaceProvider
         )
+    }
 
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

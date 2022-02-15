@@ -1,20 +1,19 @@
 package com.example.camerax_opencv.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.ThresholdViewModel
 import com.example.camerax_opencv.databinding.FragmentThresholdBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class ThresholdFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(ThresholdViewModel::class.java) }
+    private val viewModel: ThresholdViewModel by viewModels()
 
     companion object {
 
@@ -26,15 +25,18 @@ class ThresholdFragment : Fragment() {
     private var _binding: FragmentThresholdBinding? = null
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentThresholdBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -52,17 +54,15 @@ class ThresholdFragment : Fragment() {
         )
 
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val thresh = value.toDouble()
             viewModel.onThreshChange(thresh)
+            binding.thresh.text = getString(R.string.thresh, thresh.toString())
         }
         binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
-            // Responds to when slider's value is changed
             val maxVal = value.toDouble()
             viewModel.onMaxValChange(maxVal)
+            binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

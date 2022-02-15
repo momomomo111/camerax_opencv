@@ -1,6 +1,6 @@
 # Requirement
 
-opencv-4.5.2-android-sdk
+opencv-4.5.5-android-sdk
 
 # Installation
 

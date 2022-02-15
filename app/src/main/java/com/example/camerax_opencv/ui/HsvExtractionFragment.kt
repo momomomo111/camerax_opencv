@@ -1,20 +1,19 @@
 package com.example.camerax_opencv.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.example.camerax_opencv.R
 import com.example.camerax_opencv.data.HsvextractionViewModel
 import com.example.camerax_opencv.databinding.FragmentHsvextractionBinding
 import com.example.camerax_opencv.util.CameraUtil
 import com.example.camerax_opencv.util.ProcessImageAnalyzer
 
 class HsvExtractionFragment : Fragment() {
-    private val viewModel by lazy { ViewModelProvider(this).get(HsvextractionViewModel::class.java) }
+    private val viewModel: HsvextractionViewModel by viewModels()
 
     companion object {
 
@@ -26,15 +25,18 @@ class HsvExtractionFragment : Fragment() {
     private var _binding: FragmentHsvextractionBinding? = null
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHsvextractionBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -59,6 +61,8 @@ class HsvExtractionFragment : Fragment() {
             val lowerH = values[0].toDouble()
             viewModel.onUpperHChange(upperH)
             viewModel.onLowerHChange(lowerH)
+            binding.UpperHText.text = getString(R.string.upper_h, upperH.toString())
+            binding.LowerHText.text = getString(R.string.lower_h, lowerH.toString())
         }
 
         val sliderS = binding.sliderS
@@ -69,6 +73,8 @@ class HsvExtractionFragment : Fragment() {
             val lowerS = values[0].toDouble()
             viewModel.onUpperSChange(upperS)
             viewModel.onLowerSChange(lowerS)
+            binding.UpperSText.text = getString(R.string.upper_s, upperS.toString())
+            binding.LowerSText.text = getString(R.string.lower_s, lowerS.toString())
         }
 
         val sliderV = binding.sliderV
@@ -79,9 +85,9 @@ class HsvExtractionFragment : Fragment() {
             val lowerV = values[0].toDouble()
             viewModel.onUpperVChange(upperV)
             viewModel.onLowerVChange(lowerV)
+            binding.UpperVText.text = getString(R.string.upper_v, upperV.toString())
+            binding.LowerVText.text = getString(R.string.lower_v, lowerV.toString())
         }
-
-        return binding.root
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
