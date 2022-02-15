@@ -2,7 +2,6 @@ package com.momomomo111.camerax_opencv.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class CannyFragment : Fragment() {
 
     private var _binding: FragmentCannyBinding? = null
     private val binding get() = _binding!!
-    lateinit var vibrator: Vibrator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +48,7 @@ class CannyFragment : Fragment() {
             )
         )
 
-        vibrator = setVibrator(this.context)
+        val vibrator = setVibrator(this.context)
 
         binding.sliderThreshold1.addOnChangeListener { _, value, _ ->
             val thresh = value.toDouble()
