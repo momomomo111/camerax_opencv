@@ -15,13 +15,6 @@ import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 class HsvExtractionFragment : Fragment() {
     private val viewModel: HsvextractionViewModel by viewModels()
 
-    companion object {
-
-        init {
-            System.loadLibrary("opencv_java4")
-        }
-    }
-
     private var _binding: FragmentHsvextractionBinding? = null
     private val binding get() = _binding!!
 
@@ -88,6 +81,11 @@ class HsvExtractionFragment : Fragment() {
             binding.UpperVText.text = getString(R.string.upper_v, upperV.toString())
             binding.LowerVText.text = getString(R.string.lower_v, lowerV.toString())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

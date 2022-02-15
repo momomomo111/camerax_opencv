@@ -15,13 +15,6 @@ import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 class DilateFragment : Fragment() {
     private val viewModel: DilateViewModel by viewModels()
 
-    companion object {
-
-        init {
-            System.loadLibrary("opencv_java4")
-        }
-    }
-
     private var _binding: FragmentDilateBinding? = null
     private val binding get() = _binding!!
 

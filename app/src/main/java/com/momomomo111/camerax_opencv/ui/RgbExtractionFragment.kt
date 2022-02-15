@@ -15,13 +15,6 @@ import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 class RgbExtractionFragment : Fragment() {
     private val viewModel: RgbextractionViewModel by viewModels()
 
-    companion object {
-
-        init {
-            System.loadLibrary("opencv_java4")
-        }
-    }
-
     private var _binding: FragmentRgbextractionBinding? = null
     private val binding get() = _binding!!
 
@@ -88,6 +81,11 @@ class RgbExtractionFragment : Fragment() {
             binding.UpperBText.text = getString(R.string.upper_b, upperB.toString())
             binding.LowerBText.text = getString(R.string.lower_b, lowerB.toString())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
