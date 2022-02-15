@@ -20,12 +20,12 @@ object VibrationUtil {
         return vibrator
     }
 
-    fun effectSlide(vibrator: Vibrator) {
+    fun Vibrator.effectSlider() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val effect = VibrationEffect.createOneShot(10, VibrationEffect.DEFAULT_AMPLITUDE)
-            vibrator.vibrate(effect)
+            this.vibrate(effect)
         } else {
-            vibrator.vibrate(10)
+            this.vibrate(10)
         }
     }
 }

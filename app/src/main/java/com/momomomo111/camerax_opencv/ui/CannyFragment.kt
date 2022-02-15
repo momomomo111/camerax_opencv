@@ -12,7 +12,7 @@ import com.momomomo111.camerax_opencv.data.CannyViewModel
 import com.momomomo111.camerax_opencv.databinding.FragmentCannyBinding
 import com.momomomo111.camerax_opencv.util.CameraUtil
 import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
-import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlide
+import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlider
 import com.momomomo111.camerax_opencv.util.VibrationUtil.setVibrator
 
 class CannyFragment : Fragment() {
@@ -56,13 +56,13 @@ class CannyFragment : Fragment() {
             val thresh = value.toDouble()
             viewModel.onThreshold1Change(thresh)
             binding.threshold1.text = getString(R.string.threshold1, thresh.toString())
-            effectSlide(vibrator)
+            vibrator.effectSlider()
         }
         binding.sliderThreshold2.addOnChangeListener { _, value, _ ->
             val maxVal = value.toDouble()
             viewModel.onThreshold2Change(maxVal)
             binding.threshold2.text = getString(R.string.threshold2, maxVal.toString())
-            effectSlide(vibrator)
+            vibrator.effectSlider()
         }
     }
 
