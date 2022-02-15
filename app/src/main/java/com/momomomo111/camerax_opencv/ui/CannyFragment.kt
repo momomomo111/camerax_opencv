@@ -15,13 +15,6 @@ import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 class CannyFragment : Fragment() {
     private val viewModel: CannyViewModel by viewModels()
 
-    companion object {
-
-        init {
-            System.loadLibrary("opencv_java4")
-        }
-    }
-
     private var _binding: FragmentCannyBinding? = null
     private val binding get() = _binding!!
 

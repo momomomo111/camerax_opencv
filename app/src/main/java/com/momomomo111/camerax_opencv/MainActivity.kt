@@ -28,4 +28,8 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.myNavHostFragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
     }
+
+    companion object {
+        init { System.loadLibrary("opencv_java4") }
+    }
 }

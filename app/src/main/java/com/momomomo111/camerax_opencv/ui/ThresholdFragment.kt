@@ -15,13 +15,6 @@ import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 class ThresholdFragment : Fragment() {
     private val viewModel: ThresholdViewModel by viewModels()
 
-    companion object {
-
-        init {
-            System.loadLibrary("opencv_java4")
-        }
-    }
-
     private var _binding: FragmentThresholdBinding? = null
     private val binding get() = _binding!!
 
