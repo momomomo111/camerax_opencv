@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.ui
+package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.camerax_opencv.R
-import com.example.camerax_opencv.data.ErodeViewModel
-import com.example.camerax_opencv.databinding.FragmentErodeBinding
-import com.example.camerax_opencv.util.CameraUtil
-import com.example.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.R
+import com.momomomo111.camerax_opencv.data.GaussianblurViewModel
+import com.momomomo111.camerax_opencv.databinding.FragmentGaussianblurBinding
+import com.momomomo111.camerax_opencv.util.CameraUtil
+import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 
-class ErodeFragment : Fragment() {
-    private val viewModel: ErodeViewModel by viewModels()
+class GaussianBlurFragment : Fragment() {
+    private val viewModel: GaussianblurViewModel by viewModels()
 
     companion object {
 
@@ -22,7 +22,7 @@ class ErodeFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentErodeBinding? = null
+    private var _binding: FragmentGaussianblurBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class ErodeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentErodeBinding.inflate(inflater, container, false)
+        _binding = FragmentGaussianblurBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,14 +54,19 @@ class ErodeFragment : Fragment() {
         )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
-            val kSize = value.toInt()
+            val kSize = value.toDouble()
             viewModel.onKSizeChange(kSize)
             binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
         }
-        binding.sliderIterations.addOnChangeListener { _, value, _ ->
-            val iterations = value.toInt()
-            viewModel.onIterationsChange(iterations)
-            binding.iterationsText.text = getString(R.string.iterations, iterations.toString())
+        binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
+            val sigmaX = value.toDouble()
+            viewModel.onSigmaXChange(sigmaX)
+            binding.sigmaXText.text = getString(R.string.sigma_x, sigmaX.toString())
+        }
+        binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
+            val sigmaY = value.toDouble()
+            viewModel.onSigmaYChange(sigmaY)
+            binding.sigmaYText.text = getString(R.string.sigma_y, sigmaY.toString())
         }
     }
 

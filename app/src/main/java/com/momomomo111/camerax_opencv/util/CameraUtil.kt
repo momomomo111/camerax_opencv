@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.util
+package com.momomomo111.camerax_opencv.util
 
 import android.Manifest
 import android.app.Activity

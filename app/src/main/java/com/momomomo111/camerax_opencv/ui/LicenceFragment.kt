@@ -1,11 +1,11 @@
-package com.example.camerax_opencv.ui
+package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.camerax_opencv.R
+import com.momomomo111.camerax_opencv.R
 
 class LicenceFragment : Fragment() {
     override fun onCreateView(

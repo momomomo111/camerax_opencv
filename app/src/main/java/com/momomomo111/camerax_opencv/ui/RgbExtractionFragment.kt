@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.ui
+package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.camerax_opencv.R
-import com.example.camerax_opencv.data.RgbextractionViewModel
-import com.example.camerax_opencv.databinding.FragmentRgbextractionBinding
-import com.example.camerax_opencv.util.CameraUtil
-import com.example.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.R
+import com.momomomo111.camerax_opencv.data.RgbextractionViewModel
+import com.momomomo111.camerax_opencv.databinding.FragmentRgbextractionBinding
+import com.momomomo111.camerax_opencv.util.CameraUtil
+import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 
 class RgbExtractionFragment : Fragment() {
     private val viewModel: RgbextractionViewModel by viewModels()

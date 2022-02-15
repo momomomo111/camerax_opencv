@@ -1,10 +1,10 @@
-package com.example.camerax_opencv.util
+package com.momomomo111.camerax_opencv.util
 
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.PreviewView
-import com.example.camerax_opencv.data.Params
+import com.momomomo111.camerax_opencv.data.Params
 import kotlinx.coroutines.flow.StateFlow
 import org.opencv.android.Utils
 import org.opencv.core.Core

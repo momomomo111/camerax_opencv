@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.ui
+package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.camerax_opencv.R
-import com.example.camerax_opencv.databinding.FragmentTitleBinding
-import com.example.camerax_opencv.util.CameraUtil
+import com.momomomo111.camerax_opencv.R
+import com.momomomo111.camerax_opencv.databinding.FragmentTitleBinding
+import com.momomomo111.camerax_opencv.util.CameraUtil
 
 class TitleFragment : Fragment() {
     private var _binding: FragmentTitleBinding? = null

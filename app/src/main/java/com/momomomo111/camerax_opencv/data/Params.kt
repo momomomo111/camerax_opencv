@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.data
+package com.momomomo111.camerax_opencv.data
 
 import androidx.annotation.Nullable
 

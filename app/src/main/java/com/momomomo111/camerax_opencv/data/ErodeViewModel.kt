@@ -1,12 +1,12 @@
-package com.example.camerax_opencv.data
+package com.momomomo111.camerax_opencv.data
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class DilateViewModel : ViewModel() {
-    private val _params = MutableStateFlow(Params.DilateParams(1, 1))
-    val params: StateFlow<Params.DilateParams> = _params
+class ErodeViewModel : ViewModel() {
+    private val _params = MutableStateFlow(Params.ErodeParams(1, 1))
+    val params: StateFlow<Params.ErodeParams> = _params
 
     fun onKSizeChange(data: Int) {
         _params.value = _params.value.copy(kSize = data)

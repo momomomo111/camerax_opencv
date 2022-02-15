@@ -1,4 +1,4 @@
-package com.example.camerax_opencv.ui
+package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.camerax_opencv.R
-import com.example.camerax_opencv.data.ThresholdViewModel
-import com.example.camerax_opencv.databinding.FragmentThresholdBinding
-import com.example.camerax_opencv.util.CameraUtil
-import com.example.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.R
+import com.momomomo111.camerax_opencv.data.ErodeViewModel
+import com.momomomo111.camerax_opencv.databinding.FragmentErodeBinding
+import com.momomomo111.camerax_opencv.util.CameraUtil
+import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
 
-class ThresholdFragment : Fragment() {
-    private val viewModel: ThresholdViewModel by viewModels()
+class ErodeFragment : Fragment() {
+    private val viewModel: ErodeViewModel by viewModels()
 
     companion object {
 
@@ -22,7 +22,7 @@ class ThresholdFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentThresholdBinding? = null
+    private var _binding: FragmentErodeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class ThresholdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentThresholdBinding.inflate(inflater, container, false)
+        _binding = FragmentErodeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,16 +53,21 @@ class ThresholdFragment : Fragment() {
             binding.previewView.surfaceProvider
         )
 
-        binding.sliderThresh.addOnChangeListener { _, value, _ ->
-            val thresh = value.toDouble()
-            viewModel.onThreshChange(thresh)
-            binding.thresh.text = getString(R.string.thresh, thresh.toString())
+        binding.sliderKSize.addOnChangeListener { _, value, _ ->
+            val kSize = value.toInt()
+            viewModel.onKSizeChange(kSize)
+            binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
         }
-        binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
-            val maxVal = value.toDouble()
-            viewModel.onMaxValChange(maxVal)
-            binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())
+        binding.sliderIterations.addOnChangeListener { _, value, _ ->
+            val iterations = value.toInt()
+            viewModel.onIterationsChange(iterations)
+            binding.iterationsText.text = getString(R.string.iterations, iterations.toString())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
