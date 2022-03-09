@@ -232,4 +232,5 @@
     <string name="hsvextraction_nav">HSVExtraction</string>
     <string name="erode_nav">Erode</string>
     <string name="dilate_nav">Dilate</string>
+    <string name="vibration_enable">vibrationEnable</string>
 </resources>
