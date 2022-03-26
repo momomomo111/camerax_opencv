@@ -90,7 +90,7 @@ class HsvExtractionFragment : Fragment() {
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
-        if (!isAdded) return
+        if (!isAdded || !isResumed) return
         activity?.runOnUiThread(action)
     }
 }
