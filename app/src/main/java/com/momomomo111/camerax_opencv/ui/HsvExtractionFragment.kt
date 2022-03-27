@@ -35,7 +35,7 @@ class HsvExtractionFragment : Fragment() {
             ProcessImageAnalyzer(
                 {
                     runOnUiThread {
-                        binding.imageView.setImageBitmap(
+                        _binding?.imageView?.setImageBitmap(
                             it
                         )
                     }
@@ -88,9 +88,8 @@ class HsvExtractionFragment : Fragment() {
         _binding = null
     }
 
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded || !isResumed) return
+    private fun Fragment.runOnUiThread(action: () -> Unit) {
+        if (!isAdded) return
         activity?.runOnUiThread(action)
     }
 }
