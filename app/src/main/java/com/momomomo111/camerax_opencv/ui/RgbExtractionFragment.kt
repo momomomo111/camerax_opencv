@@ -40,10 +40,8 @@ class RgbExtractionFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
 
         val sliderR = binding.sliderR

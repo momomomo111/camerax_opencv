@@ -40,10 +40,8 @@ class HsvExtractionFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
 
         val sliderH = binding.sliderH

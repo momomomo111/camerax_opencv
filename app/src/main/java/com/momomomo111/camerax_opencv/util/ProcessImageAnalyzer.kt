@@ -3,7 +3,6 @@ package com.momomomo111.camerax_opencv.util
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import androidx.camera.view.PreviewView
 import com.momomomo111.camerax_opencv.data.Params
 import kotlinx.coroutines.flow.StateFlow
 import org.opencv.android.Utils
@@ -16,12 +15,10 @@ import org.opencv.imgproc.Imgproc
 
 class ProcessImageAnalyzer(
     val runOnUiThread: (Bitmap) -> Unit,
-    val previewView: PreviewView?,
     val params: StateFlow<Params>
 ) : ImageAnalysis.Analyzer {
     override fun analyze(image: ImageProxy) {
-        val matOrg: Mat = CameraUtil.getMatFromImage(image)
-        val mat: Mat = CameraUtil.fixMatRotation(matOrg, previewView)
+        val mat: Mat = CameraUtil.getMatFromImage(image)
         val matMask = Mat(mat.rows(), mat.cols(), 0)
         val matTemp = Mat(mat.rows(), mat.cols(), mat.type())
         val matOutput = Mat(mat.rows(), mat.cols(), mat.type())

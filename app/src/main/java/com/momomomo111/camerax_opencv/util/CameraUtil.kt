@@ -5,13 +5,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
-import android.view.Surface
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -31,8 +28,7 @@ private val REQUIRED_PERMISSIONS = arrayOf(
 object CameraUtil {
     fun startCamera(
         context: Context,
-        imageAnalyzer: ProcessImageAnalyzer,
-        provider: Preview.SurfaceProvider
+        imageAnalyzer: ProcessImageAnalyzer
     ) {
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
             ProcessCameraProvider.getInstance(context)
@@ -40,20 +36,16 @@ object CameraUtil {
             {
                 try {
                     val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-                    val preview = Preview.Builder().build()
                     val imageAnalysis = ImageAnalysis.Builder().build()
                     imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), imageAnalyzer)
-                    val cameraSelector =
-                        CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                            .build()
+                    val cameraSelector = CameraSelector.Builder()
+                        .requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
                     cameraProvider.unbindAll()
                     cameraProvider.bindToLifecycle(
                         (context as LifecycleOwner),
                         cameraSelector,
-                        preview,
                         imageAnalysis
                     )
-                    preview.setSurfaceProvider(provider)
                 } catch (e: Exception) {
                     Log.e("error", "[startCamera] Use case binding failed", e)
                 }
@@ -75,28 +67,29 @@ object CameraUtil {
         uBuffer.get(nv21, ySize + vSize, uSize)
         val yuv = Mat(image.height + image.height / 2, image.width, CvType.CV_8UC1)
         yuv.put(0, 0, nv21)
-        val mat = Mat()
+        var mat = Mat()
         Imgproc.cvtColor(yuv, mat, Imgproc.COLOR_YUV2RGB_NV21, 3)
+        mat = fixMatRotation(mat, image.imageInfo.rotationDegrees)
         return mat
     }
 
-    fun fixMatRotation(matOrg: Mat, previewView: PreviewView?): Mat {
+    private fun fixMatRotation(matOrg: Mat, rotationDegrees: Int): Mat {
         val mat: Mat
-        when (previewView?.display?.rotation) {
-            Surface.ROTATION_0 -> {
+        when (rotationDegrees) {
+            0 -> {
+                mat = matOrg
+            }
+            90 -> {
                 mat = Mat(matOrg.cols(), matOrg.rows(), matOrg.type())
                 Core.transpose(matOrg, mat)
                 Core.flip(mat, mat, 1)
             }
-            Surface.ROTATION_90 -> mat = matOrg
-            Surface.ROTATION_270 -> {
+            180 -> {
                 mat = matOrg
                 Core.flip(mat, mat, -1)
             }
             else -> {
-                mat = Mat(matOrg.cols(), matOrg.rows(), matOrg.type())
-                Core.transpose(matOrg, mat)
-                Core.flip(mat, mat, 1)
+                mat = matOrg
             }
         }
         return mat
