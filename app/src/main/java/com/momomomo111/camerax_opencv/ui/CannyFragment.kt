@@ -40,10 +40,8 @@ class CannyFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
 
         binding.sliderThreshold1.addOnChangeListener { _, value, _ ->

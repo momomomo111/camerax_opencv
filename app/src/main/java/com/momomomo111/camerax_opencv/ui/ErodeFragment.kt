@@ -40,10 +40,8 @@ class ErodeFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
 
         binding.sliderKSize.addOnChangeListener { _, value, _ ->

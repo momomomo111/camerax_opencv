@@ -39,10 +39,8 @@ class GrayScaleFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
     }
 

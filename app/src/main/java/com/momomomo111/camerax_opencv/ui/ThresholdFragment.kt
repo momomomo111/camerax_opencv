@@ -40,10 +40,8 @@ class ThresholdFragment : Fragment() {
                         )
                     }
                 },
-                binding.previewView,
                 viewModel.params
-            ),
-            binding.previewView.surfaceProvider
+            )
         )
 
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
