@@ -1,7 +1,6 @@
 package com.momomomo111.camerax_opencv.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -25,7 +24,7 @@ import com.momomomo111.camerax_opencv.util.CameraUtil
 import kotlinx.coroutines.launch
 
 class TitleFragment : Fragment() {
-    private val settingsViewModel: SettingsViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     private var _binding: FragmentTitleBinding? = null
     private val binding get() = _binding!!
@@ -44,7 +43,6 @@ class TitleFragment : Fragment() {
             view.findNavController().navigate(R.id.action_titleFragment_to_thresholdFragment)
         }
         binding.cannyButton.setOnClickListener { view: View ->
-            Log.d("TitleFraghoge", isChecked.toString())
             view.findNavController()
                 .navigate(TitleFragmentDirections.actionTitleFragmentToCannyFragment(isChecked))
         }
@@ -97,7 +95,6 @@ class TitleFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 settingsViewModel.settingsUiState.collect {
-                    Log.d("hoge", it.toString())
                     isChecked = when (it) {
                         is SettingsUiState.Success -> {
                             it.vibration
