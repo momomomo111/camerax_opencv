@@ -5,4 +5,8 @@
         android:id="@+id/licenceFragment"
         android:icon="@drawable/ic_license"
         android:title="@string/licence" />
+    <item
+        android:id="@+id/vibrationSwitch"
+        android:icon="@drawable/ic_baseline_vibration"
+        android:title="@string/vibration" />
 </menu>

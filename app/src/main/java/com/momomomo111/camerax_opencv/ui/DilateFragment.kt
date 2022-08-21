@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.momomomo111.camerax_opencv.R
 import com.momomomo111.camerax_opencv.data.DilateViewModel
 import com.momomomo111.camerax_opencv.databinding.FragmentDilateBinding
 import com.momomomo111.camerax_opencv.util.CameraUtil
 import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.util.VibrationUtil
+import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlider
 
 class DilateFragment : Fragment() {
-    private val viewModel: DilateViewModel by viewModels()
+    private val dilateViewModel: DilateViewModel by viewModels()
+    private val args: DilateFragmentArgs by navArgs()
 
     private var _binding: FragmentDilateBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +34,8 @@ class DilateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val enableVibration = args.vibrationEnable
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -40,19 +46,27 @@ class DilateFragment : Fragment() {
                         )
                     }
                 },
-                viewModel.params
+                dilateViewModel.params
             ),
         )
 
+        val vibrator = VibrationUtil.setVibrator(this.context)
+
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
             val kSize = value.toInt()
-            viewModel.onKSizeChange(kSize)
+            dilateViewModel.onKSizeChange(kSize)
             binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
         binding.sliderIterations.addOnChangeListener { _, value, _ ->
             val iterations = value.toInt()
-            viewModel.onIterationsChange(iterations)
+            dilateViewModel.onIterationsChange(iterations)
             binding.iterationsText.text = getString(R.string.iterations, iterations.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
     }
 
