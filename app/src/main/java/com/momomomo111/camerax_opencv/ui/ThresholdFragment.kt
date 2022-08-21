@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.momomomo111.camerax_opencv.R
 import com.momomomo111.camerax_opencv.data.ThresholdViewModel
 import com.momomomo111.camerax_opencv.databinding.FragmentThresholdBinding
 import com.momomomo111.camerax_opencv.util.CameraUtil
 import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.util.VibrationUtil
+import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlider
 
 class ThresholdFragment : Fragment() {
-    private val viewModel: ThresholdViewModel by viewModels()
+    private val thresholdViewModel: ThresholdViewModel by viewModels()
+    private val args: ThresholdFragmentArgs by navArgs()
 
     private var _binding: FragmentThresholdBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +34,8 @@ class ThresholdFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val enableVibration = args.vibrationEnable
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -40,19 +46,27 @@ class ThresholdFragment : Fragment() {
                         )
                     }
                 },
-                viewModel.params
+                thresholdViewModel.params
             )
         )
 
+        val vibrator = VibrationUtil.setVibrator(this.context)
+
         binding.sliderThresh.addOnChangeListener { _, value, _ ->
             val thresh = value.toDouble()
-            viewModel.onThreshChange(thresh)
+            thresholdViewModel.onThreshChange(thresh)
             binding.thresh.text = getString(R.string.thresh, thresh.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
         binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
             val maxVal = value.toDouble()
-            viewModel.onMaxValChange(maxVal)
+            thresholdViewModel.onMaxValChange(maxVal)
             binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
     }
 

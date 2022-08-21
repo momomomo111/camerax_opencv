@@ -37,10 +37,13 @@ class TitleFragment : Fragment() {
     ): View {
         _binding = FragmentTitleBinding.inflate(inflater, container, false)
         binding.gaussianBlurButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_gaussianBlurFragment)
+            view.findNavController().navigate(
+                TitleFragmentDirections.actionTitleFragmentToGaussianBlurFragment(isChecked)
+            )
         }
         binding.thresholdButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_thresholdFragment)
+            view.findNavController()
+                .navigate(TitleFragmentDirections.actionTitleFragmentToThresholdFragment(isChecked))
         }
         binding.cannyButton.setOnClickListener { view: View ->
             view.findNavController()
@@ -50,16 +53,23 @@ class TitleFragment : Fragment() {
             view.findNavController().navigate(R.id.action_titleFragment_to_grayScaleFragment)
         }
         binding.rgbExtractionButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_rgbExtractionFragment)
+            view.findNavController().navigate(
+                TitleFragmentDirections.actionTitleFragmentToRgbExtractionFragment(isChecked)
+            )
         }
         binding.hsvExtractionButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_hsvExtractionFragment)
+            view.findNavController()
+                .navigate(
+                    TitleFragmentDirections.actionTitleFragmentToHsvExtractionFragment(isChecked)
+                )
         }
         binding.erodeButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_erodeFragment)
+            view.findNavController()
+                .navigate(TitleFragmentDirections.actionTitleFragmentToErodeFragment(isChecked))
         }
         binding.dilateButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_dilateFragment)
+            view.findNavController()
+                .navigate(TitleFragmentDirections.actionTitleFragmentToDilateFragment(isChecked))
         }
         if (!CameraUtil.checkPermissions(requireContext())) {
             CameraUtil.userRequestPermissions(requireActivity())

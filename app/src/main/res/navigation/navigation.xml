@@ -39,42 +39,77 @@
     <fragment
         android:id="@+id/gaussianBlurFragment"
         android:name="com.momomomo111.camerax_opencv.ui.GaussianBlurFragment"
-        android:label="GaussianBlur" />
+        android:label="GaussianBlur">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/thresholdFragment"
         android:name="com.momomomo111.camerax_opencv.ui.ThresholdFragment"
-        android:label="Threshold" />
+        android:label="Threshold">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/licenceFragment"
         android:name="com.momomomo111.camerax_opencv.ui.LicenceFragment"
-        android:label="Licence" />
+        android:label="Licence">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/cannyFragment"
         android:name="com.momomomo111.camerax_opencv.ui.CannyFragment"
-        android:label="Canny" >
+        android:label="Canny">
         <argument
             android:name="vibrationEnable"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/grayScaleFragment"
         android:name="com.momomomo111.camerax_opencv.ui.GrayScaleFragment"
-        android:label="GrayScale" />
+        android:label="GrayScale"/>
     <fragment
         android:id="@+id/rgbExtractionFragment"
         android:name="com.momomomo111.camerax_opencv.ui.RgbExtractionFragment"
-        android:label="RgbExtraction" />
+        android:label="RgbExtraction">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/hsvExtractionFragment"
         android:name="com.momomomo111.camerax_opencv.ui.HsvExtractionFragment"
-        android:label="HsvExtraction" />
+        android:label="HsvExtraction">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/erodeFragment"
         android:name="com.momomomo111.camerax_opencv.ui.ErodeFragment"
-        android:label="Erode" />
+        android:label="Erode">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/dilateFragment"
         android:name="com.momomomo111.camerax_opencv.ui.DilateFragment"
-        android:label="Dilate" />
+        android:label="Dilate">
+        <argument
+            android:name="vibrationEnable"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 </navigation>
