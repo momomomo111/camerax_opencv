@@ -1,8 +1,6 @@
 package com.momomomo111.camerax_opencv.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,7 @@ import com.momomomo111.camerax_opencv.util.VibrationUtil.setVibrator
 
 class CannyFragment : Fragment() {
     private val cannyViewModel: CannyViewModel by viewModels()
-    val args: CannyFragmentArgs by navArgs()
+    private val args: CannyFragmentArgs by navArgs()
 
     private var _binding: FragmentCannyBinding? = null
     private val binding get() = _binding!!
@@ -33,13 +31,10 @@ class CannyFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val enableVibration = args.vibrationEnable
-
-        Log.d("Cannnyhoge", enableVibration.toString())
 
         CameraUtil.startCamera(
             requireContext(),
@@ -71,7 +66,9 @@ class CannyFragment : Fragment() {
             val maxVal = value.toDouble()
             cannyViewModel.onThreshold2Change(maxVal)
             binding.threshold2.text = getString(R.string.threshold2, maxVal.toString())
-            vibrator.effectSlider()
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
     }
 
