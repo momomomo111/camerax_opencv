@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.momomomo111.camerax_opencv.R
 import com.momomomo111.camerax_opencv.data.GaussianblurViewModel
 import com.momomomo111.camerax_opencv.databinding.FragmentGaussianblurBinding
 import com.momomomo111.camerax_opencv.util.CameraUtil
 import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.util.VibrationUtil
+import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlider
 
 class GaussianBlurFragment : Fragment() {
-    private val viewModel: GaussianblurViewModel by viewModels()
+    private val gaussianblurViewModel: GaussianblurViewModel by viewModels()
+    private val args: GaussianBlurFragmentArgs by navArgs()
 
     private var _binding: FragmentGaussianblurBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +34,8 @@ class GaussianBlurFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val enableVibration = args.vibrationEnable
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -41,25 +47,36 @@ class GaussianBlurFragment : Fragment() {
                     }
                 },
                 binding.previewView,
-                viewModel.params
+                gaussianblurViewModel.params
             ),
             binding.previewView.surfaceProvider
         )
 
+        val vibrator = VibrationUtil.setVibrator(this.context)
+
         binding.sliderKSize.addOnChangeListener { _, value, _ ->
             val kSize = value.toDouble()
-            viewModel.onKSizeChange(kSize)
+            gaussianblurViewModel.onKSizeChange(kSize)
             binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
         binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
             val sigmaX = value.toDouble()
-            viewModel.onSigmaXChange(sigmaX)
+            gaussianblurViewModel.onSigmaXChange(sigmaX)
             binding.sigmaXText.text = getString(R.string.sigma_x, sigmaX.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
         binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
             val sigmaY = value.toDouble()
-            viewModel.onSigmaYChange(sigmaY)
+            gaussianblurViewModel.onSigmaYChange(sigmaY)
             binding.sigmaYText.text = getString(R.string.sigma_y, sigmaY.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
     }
 

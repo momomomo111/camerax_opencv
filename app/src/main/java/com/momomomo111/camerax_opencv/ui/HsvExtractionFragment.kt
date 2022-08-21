@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.momomomo111.camerax_opencv.R
 import com.momomomo111.camerax_opencv.data.HsvextractionViewModel
 import com.momomomo111.camerax_opencv.databinding.FragmentHsvextractionBinding
 import com.momomomo111.camerax_opencv.util.CameraUtil
 import com.momomomo111.camerax_opencv.util.ProcessImageAnalyzer
+import com.momomomo111.camerax_opencv.util.VibrationUtil
+import com.momomomo111.camerax_opencv.util.VibrationUtil.effectSlider
 
 class HsvExtractionFragment : Fragment() {
-    private val viewModel: HsvextractionViewModel by viewModels()
+    private val hsvextractionViewModel: HsvextractionViewModel by viewModels()
+    private val args: GaussianBlurFragmentArgs by navArgs()
 
     private var _binding: FragmentHsvextractionBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +34,8 @@ class HsvExtractionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val enableVibration = args.vibrationEnable
+
         CameraUtil.startCamera(
             requireContext(),
             ProcessImageAnalyzer(
@@ -41,10 +47,12 @@ class HsvExtractionFragment : Fragment() {
                     }
                 },
                 binding.previewView,
-                viewModel.params
+                hsvextractionViewModel.params
             ),
             binding.previewView.surfaceProvider
         )
+
+        val vibrator = VibrationUtil.setVibrator(this.context)
 
         val sliderH = binding.sliderH
         sliderH.setValues(0.0F, 255.0F)
@@ -52,10 +60,13 @@ class HsvExtractionFragment : Fragment() {
             val values = sliderH.values
             val upperH = values[1].toDouble()
             val lowerH = values[0].toDouble()
-            viewModel.onUpperHChange(upperH)
-            viewModel.onLowerHChange(lowerH)
+            hsvextractionViewModel.onUpperHChange(upperH)
+            hsvextractionViewModel.onLowerHChange(lowerH)
             binding.UpperHText.text = getString(R.string.upper_h, upperH.toString())
             binding.LowerHText.text = getString(R.string.lower_h, lowerH.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
 
         val sliderS = binding.sliderS
@@ -64,10 +75,13 @@ class HsvExtractionFragment : Fragment() {
             val values = sliderS.values
             val upperS = values[1].toDouble()
             val lowerS = values[0].toDouble()
-            viewModel.onUpperSChange(upperS)
-            viewModel.onLowerSChange(lowerS)
+            hsvextractionViewModel.onUpperSChange(upperS)
+            hsvextractionViewModel.onLowerSChange(lowerS)
             binding.UpperSText.text = getString(R.string.upper_s, upperS.toString())
             binding.LowerSText.text = getString(R.string.lower_s, lowerS.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
 
         val sliderV = binding.sliderV
@@ -76,10 +90,13 @@ class HsvExtractionFragment : Fragment() {
             val values = sliderV.values
             val upperV = values[1].toDouble()
             val lowerV = values[0].toDouble()
-            viewModel.onUpperVChange(upperV)
-            viewModel.onLowerVChange(lowerV)
+            hsvextractionViewModel.onUpperVChange(upperV)
+            hsvextractionViewModel.onLowerVChange(lowerV)
             binding.UpperVText.text = getString(R.string.upper_v, upperV.toString())
             binding.LowerVText.text = getString(R.string.lower_v, lowerV.toString())
+            if (enableVibration) {
+                vibrator.effectSlider()
+            }
         }
     }
 
