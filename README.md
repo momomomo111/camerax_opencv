@@ -1,13 +1,15 @@
 # Requirement
 
-opencv-4.5.5-android-sdk
+opencv-4.6.0-android-sdk
 
 # Installation
 
 Please install the opencv SDK.
 https://github.com/opencv/opencv/releases
 
-Download: opencv-4.5.x-android-sdk.zip
+Download: opencv-4.6.x-android-sdk.zip
+
+After unzipping the opencv sdk, specify its location in settings.gradle.
 
 # GooglePlayStore
 
