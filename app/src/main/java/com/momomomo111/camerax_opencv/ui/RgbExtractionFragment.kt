@@ -52,9 +52,9 @@ class RgbExtractionFragment : Fragment() {
 
         val vibrator = VibrationUtil.setVibrator(this.context)
 
-        val sliderR = binding.sliderR
-        sliderR.setValues(0.0F, 255.0F)
-        sliderR.addOnChangeListener { _, _, _ ->
+        val sliderR = _binding?.sliderR
+        sliderR?.setValues(0.0F, 255.0F)
+        sliderR?.addOnChangeListener { _, _, _ ->
             val values = sliderR.values
             val upperR = values[1].toDouble()
             val lowerR = values[0].toDouble()
@@ -67,9 +67,9 @@ class RgbExtractionFragment : Fragment() {
             }
         }
 
-        val sliderG = binding.sliderG
-        sliderG.setValues(0.0F, 255.0F)
-        sliderG.addOnChangeListener { _, _, _ ->
+        val sliderG = _binding?.sliderG
+        sliderG?.setValues(0.0F, 255.0F)
+        sliderG?.addOnChangeListener { _, _, _ ->
             val values = sliderG.values
             val upperG = values[1].toDouble()
             val lowerG = values[0].toDouble()
@@ -82,9 +82,9 @@ class RgbExtractionFragment : Fragment() {
             }
         }
 
-        val sliderB = binding.sliderB
-        sliderB.setValues(0.0F, 255.0F)
-        sliderB.addOnChangeListener { _, _, _ ->
+        val sliderB = _binding?.sliderB
+        sliderB?.setValues(0.0F, 255.0F)
+        sliderB?.addOnChangeListener { _, _, _ ->
             val values = sliderB.values
             val upperB = values[1].toDouble()
             val lowerB = values[0].toDouble()

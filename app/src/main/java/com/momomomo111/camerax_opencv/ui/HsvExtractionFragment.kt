@@ -52,9 +52,9 @@ class HsvExtractionFragment : Fragment() {
 
         val vibrator = VibrationUtil.setVibrator(this.context)
 
-        val sliderH = binding.sliderH
-        sliderH.setValues(0.0F, 255.0F)
-        sliderH.addOnChangeListener { _, _, _ ->
+        val sliderH = _binding?.sliderH
+        sliderH?.setValues(0.0F, 255.0F)
+        sliderH?.addOnChangeListener { _, _, _ ->
             val values = sliderH.values
             val upperH = values[1].toDouble()
             val lowerH = values[0].toDouble()
@@ -67,9 +67,9 @@ class HsvExtractionFragment : Fragment() {
             }
         }
 
-        val sliderS = binding.sliderS
-        sliderS.setValues(0.0F, 255.0F)
-        sliderS.addOnChangeListener { _, _, _ ->
+        val sliderS = _binding?.sliderS
+        sliderS?.setValues(0.0F, 255.0F)
+        sliderS?.addOnChangeListener { _, _, _ ->
             val values = sliderS.values
             val upperS = values[1].toDouble()
             val lowerS = values[0].toDouble()
@@ -82,9 +82,9 @@ class HsvExtractionFragment : Fragment() {
             }
         }
 
-        val sliderV = binding.sliderV
-        sliderV.setValues(0.0F, 255.0F)
-        sliderV.addOnChangeListener { _, _, _ ->
+        val sliderV = _binding?.sliderV
+        sliderV?.setValues(0.0F, 255.0F)
+        sliderV?.addOnChangeListener { _, _, _ ->
             val values = sliderV.values
             val upperV = values[1].toDouble()
             val lowerV = values[0].toDouble()

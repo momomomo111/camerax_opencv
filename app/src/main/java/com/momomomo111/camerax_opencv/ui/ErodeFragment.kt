@@ -52,7 +52,7 @@ class ErodeFragment : Fragment() {
 
         val vibrator = VibrationUtil.setVibrator(this.context)
 
-        binding.sliderKSize.addOnChangeListener { _, value, _ ->
+        _binding?.sliderKSize?.addOnChangeListener { _, value, _ ->
             val kSize = value.toInt()
             erodeViewModel.onKSizeChange(kSize)
             binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
@@ -60,7 +60,7 @@ class ErodeFragment : Fragment() {
                 vibrator.effectSlider()
             }
         }
-        binding.sliderIterations.addOnChangeListener { _, value, _ ->
+        _binding?.sliderIterations?.addOnChangeListener { _, value, _ ->
             val iterations = value.toInt()
             erodeViewModel.onIterationsChange(iterations)
             binding.iterationsText.text = getString(R.string.iterations, iterations.toString())

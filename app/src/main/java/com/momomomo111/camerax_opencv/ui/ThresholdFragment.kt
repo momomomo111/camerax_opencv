@@ -52,7 +52,7 @@ class ThresholdFragment : Fragment() {
 
         val vibrator = VibrationUtil.setVibrator(this.context)
 
-        binding.sliderThresh.addOnChangeListener { _, value, _ ->
+        _binding?.sliderThresh?.addOnChangeListener { _, value, _ ->
             val thresh = value.toDouble()
             thresholdViewModel.onThreshChange(thresh)
             binding.thresh.text = getString(R.string.thresh, thresh.toString())
@@ -60,7 +60,7 @@ class ThresholdFragment : Fragment() {
                 vibrator.effectSlider()
             }
         }
-        binding.sliderMaxVal.addOnChangeListener { _, value, _ ->
+        _binding?.sliderMaxVal?.addOnChangeListener { _, value, _ ->
             val maxVal = value.toDouble()
             thresholdViewModel.onMaxValChange(maxVal)
             binding.MaxVal.text = getString(R.string.max_val, maxVal.toString())

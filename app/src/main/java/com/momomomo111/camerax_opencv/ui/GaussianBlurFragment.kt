@@ -52,7 +52,7 @@ class GaussianBlurFragment : Fragment() {
 
         val vibrator = VibrationUtil.setVibrator(this.context)
 
-        binding.sliderKSize.addOnChangeListener { _, value, _ ->
+        _binding?.sliderKSize?.addOnChangeListener { _, value, _ ->
             val kSize = value.toDouble()
             gaussianblurViewModel.onKSizeChange(kSize)
             binding.kSizeText.text = getString(R.string.k_size, kSize.toString())
@@ -60,7 +60,7 @@ class GaussianBlurFragment : Fragment() {
                 vibrator.effectSlider()
             }
         }
-        binding.sliderSigmaX.addOnChangeListener { _, value, _ ->
+        _binding?.sliderSigmaX?.addOnChangeListener { _, value, _ ->
             val sigmaX = value.toDouble()
             gaussianblurViewModel.onSigmaXChange(sigmaX)
             binding.sigmaXText.text = getString(R.string.sigma_x, sigmaX.toString())
@@ -68,7 +68,7 @@ class GaussianBlurFragment : Fragment() {
                 vibrator.effectSlider()
             }
         }
-        binding.sliderSigmaY.addOnChangeListener { _, value, _ ->
+        _binding?.sliderSigmaY?.addOnChangeListener { _, value, _ ->
             val sigmaY = value.toDouble()
             gaussianblurViewModel.onSigmaYChange(sigmaY)
             binding.sigmaYText.text = getString(R.string.sigma_y, sigmaY.toString())

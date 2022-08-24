@@ -52,7 +52,7 @@ class CannyFragment : Fragment() {
 
         val vibrator = setVibrator(this.context)
 
-        binding.sliderThreshold1.addOnChangeListener { _, value, _ ->
+        _binding?.sliderThreshold1?.addOnChangeListener { _, value, _ ->
             val thresh = value.toDouble()
             cannyViewModel.onThreshold1Change(thresh)
             binding.threshold1.text = getString(R.string.threshold1, thresh.toString())
@@ -60,7 +60,7 @@ class CannyFragment : Fragment() {
                 vibrator.effectSlider()
             }
         }
-        binding.sliderThreshold2.addOnChangeListener { _, value, _ ->
+        _binding?.sliderThreshold2?.addOnChangeListener { _, value, _ ->
             val maxVal = value.toDouble()
             cannyViewModel.onThreshold2Change(maxVal)
             binding.threshold2.text = getString(R.string.threshold2, maxVal.toString())
