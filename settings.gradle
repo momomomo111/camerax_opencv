@@ -1,7 +1,7 @@
 include ':app'
 rootProject.name = "camerax_opencv"
 
-def opencvsdk='/Users/mossa/Library/Android/OpenCV-android-sdk'
+def opencvsdk='./OpenCV-android-sdk'
 //def opencvsdk='/<path to OpenCV-android-sdk>'
 include ':opencv'
 project(':opencv').projectDir = new File(opencvsdk + '/sdk')
