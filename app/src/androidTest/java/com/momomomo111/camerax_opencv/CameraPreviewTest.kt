@@ -93,7 +93,7 @@ class CameraPreviewTest : LifecycleOwner, ImageReader.OnImageAvailableListener,
     /**
      * @see ProcessCameraProvider.bindToLifecycle
      */
-    override fun getLifecycle() = registry
+    override val lifecycle = registry
 
     @Before
     @UiThreadTest
@@ -118,6 +118,7 @@ class CameraPreviewTest : LifecycleOwner, ImageReader.OnImageAvailableListener,
             SurfaceRequest.Result.RESULT_SURFACE_USED_SUCCESSFULLY -> {
                 Log.i("CameraPreviewTest", result.toString())
             }
+
             SurfaceRequest.Result.RESULT_REQUEST_CANCELLED, SurfaceRequest.Result.RESULT_INVALID_SURFACE, SurfaceRequest.Result.RESULT_SURFACE_ALREADY_PROVIDED, SurfaceRequest.Result.RESULT_WILL_NOT_PROVIDE_SURFACE -> {
                 Log.e("CameraPreviewTest", result.toString())
             }
