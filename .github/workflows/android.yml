@@ -45,4 +45,4 @@ jobs:
           arch: 'x86'
           profile: 'pixel'
           disable-animations: true
-          script: ./gradlew connectedMockDebugAndroidTest
+          script: ./gradlew connectedAndroidTest
