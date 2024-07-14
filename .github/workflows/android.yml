@@ -33,6 +33,9 @@ jobs:
         run: sh ./.github/download_opencv_sdk.sh
       - name: Install Android SDK
         uses: malinskiy/action-android/install-sdk@release/0.1.7
+      - run: sdkmanager platform-tools
+      - run: adb devices
+      - run: echo $ANDROID_HOME
       - name: Instrumented Test
         uses: malinskiy/action-android/emulator-run-cmd@release/0.1.7
         with:
