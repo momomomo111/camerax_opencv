@@ -37,4 +37,4 @@ jobs:
           cmd: ./gradlew connectedAndroidTest
           api: 28
           tag: default
-          abi: x86
+          abi: armeabi-v7a
