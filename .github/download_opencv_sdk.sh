@@ -8,3 +8,6 @@
 
 # rmコマンドのパスを確認（通常は/bin/rmで問題ありません）
 /bin/rm /tmp/OpenCV-android-sdk.zip
+
+# opencv build.gradleファイルを置き換え
+cp $GITHUB_WORKSPACE/opencv-manifest/build.gradle $GITHUB_WORKSPACE/sdk/opencv/build.gradle
