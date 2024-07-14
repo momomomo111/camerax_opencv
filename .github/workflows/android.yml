@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macOS-12
     steps:
       - uses: actions/checkout@v3
       - name: Set Up JDK 17
