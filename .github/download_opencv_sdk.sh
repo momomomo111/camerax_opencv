@@ -10,4 +10,4 @@
 /bin/rm /tmp/OpenCV-android-sdk.zip
 
 # opencv build.gradleファイルを置き換え
-cp $GITHUB_WORKSPACE/opencv-manifest/build.gradle $GITHUB_WORKSPACE/sdk/opencv/build.gradle
+cp $GITHUB_WORKSPACE/opencv-manifest/build.gradle $GITHUB_WORKSPACE/OpenCV-android-sdk/sdk/build.gradle
