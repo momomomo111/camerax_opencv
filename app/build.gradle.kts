@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.momomomo111.camerax_opencv"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 34
         versionCode = 9
         versionName = "1.2.3"
 
