@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.momomomo111.camerax_opencv"
-        minSdk = 21
+        minSdk = 22
         targetSdk = 34
         versionCode = 9
         versionName = "1.2.3"
