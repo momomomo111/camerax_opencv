@@ -12,8 +12,8 @@ android {
         applicationId = "com.momomomo111.camerax_opencv"
         minSdk = 22
         targetSdk = 34
-        versionCode = 9
-        versionName = "1.2.3"
+        versionCode = 10
+        versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
