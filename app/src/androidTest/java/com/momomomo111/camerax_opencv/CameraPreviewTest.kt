@@ -93,7 +93,8 @@ class CameraPreviewTest : LifecycleOwner, ImageReader.OnImageAvailableListener,
     /**
      * @see ProcessCameraProvider.bindToLifecycle
      */
-    override fun getLifecycle() = registry
+    override val lifecycle: Lifecycle
+        get() = registry
 
     @Before
     @UiThreadTest
