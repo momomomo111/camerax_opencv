@@ -48,7 +48,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.3")
-    implementation(project(mapOf("path" to ":opencv")))
+    implementation("org.opencv:opencv:4.10.0")
     // CameraX
     val cameraxVersion = "1.3.4"
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
